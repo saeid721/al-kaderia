@@ -9,6 +9,7 @@ import '../../../../../global/widget/global_text.dart';
 import '../../global/constants/colors_resources.dart';
 import '../../global/constants/enum.dart';
 import 'dashboard/dashboard_screen.dart';
+import 'dashboard/sale_entry_search/sale_entry_search.dart';
 
 class CustomDrawerScreen extends StatefulWidget {
   const CustomDrawerScreen({super.key});
@@ -21,12 +22,8 @@ class _CustomDrawerScreenState extends State<CustomDrawerScreen> {
 
   int isClick = 0;
   List<GlobalMenuModel> menuItem = [
-    GlobalMenuModel(img: Images.home, text: 'হোম'),
-    GlobalMenuModel(img: Images.contact, text: 'যোগাযোগ'),
-    GlobalMenuModel(img: Images.notification, text: 'নোটিফিকেশন'),
-    GlobalMenuModel(img: Images.share, text: 'শেয়ার করুন'),
-    GlobalMenuModel(img: Images.rating, text: 'রেটিং দিন'),
-    GlobalMenuModel(img: Images.privacyPolicy, text: 'গোপনীয়তা নীতি'),
+    GlobalMenuModel(img: Images.home, text: 'Home'),
+    GlobalMenuModel(img: Images.searchSale, text: 'Sale Entry Search'),
   ];
 
   @override
@@ -79,13 +76,7 @@ class _CustomDrawerScreenState extends State<CustomDrawerScreen> {
                                 Get.to(()=> const SuperHomeScreen());
                                 break;
                               case 1:
-                                Get.to(()=> const SuperHomeScreen());
-                                break;
-                              case 2:
-                                Get.to(()=> const SuperHomeScreen());
-                                break;
-                              case 3:
-                                Get.to(()=> const SuperHomeScreen());
+                                Get.to(()=> const SaleEntrySearchScreen());
                                 break;
                             }
 

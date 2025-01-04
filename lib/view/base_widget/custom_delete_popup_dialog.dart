@@ -22,7 +22,7 @@ class CustomAlertDialogForPermission extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           const SizedBox(height: 20,),
-          Image.asset(isError?Images.error:Images.confirmicon,height: 40,width: 40,) ,
+          Image.asset(isError?Images.error:Images.confirmIcon,height: 40,width: 40,) ,
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
