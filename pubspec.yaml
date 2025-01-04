@@ -1,0 +1,55 @@
+name: al_kaderia
+description: "Al-Kaderia Restaurant App"
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.4.3 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.8
+  dio: ^5.7.0
+  get: ^4.6.6
+  intl: ^0.20.1
+  image: ^4.5.2
+  get_it: ^8.0.3
+  marquee: ^2.3.0
+  shimmer: ^3.0.0
+  url_launcher: ^6.3.1
+  image_picker: ^1.1.2
+  carousel_slider: ^5.0.0
+  connectivity_plus: ^6.1.1
+  esc_pos_utils_plus: ^2.0.4
+  shared_preferences: ^2.3.5
+  permission_handler: ^11.3.1
+  circular_badge_avatar: ^0.1.5
+  flutter_image_compress: ^2.4.0
+#  flutter_barcode_scanner: ^2.0.0
+  print_bluetooth_thermal: ^1.1.4
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^3.0.0
+
+flutter:
+
+  uses-material-design: true
+
+  # To add assets to your application, add an assets section, like this:
+  assets:
+    - assets/images/
+    - assets/icons/
+    - assets/dummy_img/
+
+  # fonts:
+  #   - family: Schyler
+  #     fonts:
+  #       - asset: fonts/Schyler-Regular.ttf
+  #       - asset: fonts/Schyler-Italic.ttf
+  #
