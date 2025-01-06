@@ -2,8 +2,8 @@ import 'dart:developer';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../constants/colors_resources.dart';
+import '../widget/global_text.dart';
 
 void printTest(String text){
   if(kDebugMode){
@@ -18,10 +18,11 @@ void showLog(String text){
 }
 
 void showCustomSnackBar(String message, {
-      bool isError = true,
-      bool isPosition= false,
-      double? duration,
-    }) {
+  IconData? icon,
+  bool isError = true,
+  bool isPosition= true,
+  double? duration,
+}) {
   Get.showSnackbar(
 
       GetSnackBar(
@@ -34,14 +35,18 @@ void showCustomSnackBar(String message, {
         borderRadius: 10,
         isDismissible: true,
         snackPosition: isPosition?SnackPosition.BOTTOM:SnackPosition.TOP,
+        icon: Icon(isError ? Icons.error : Icons.check_circle,
+          size: 25,
+          color: ColorRes.white,
+        ),
 
-  ));
+      ));
 }
 
 class OverlayLoadingIndicator extends StatelessWidget {
   const OverlayLoadingIndicator({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -53,14 +58,21 @@ class OverlayLoadingIndicator extends StatelessWidget {
           width: 120,
           padding: const EdgeInsets.all(24),
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: ColorRes.white,
             borderRadius: BorderRadius.circular(6),
           ),
           child: const Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              CircularProgressIndicator(),
-              Text("Loading..."),
+              CircularProgressIndicator(
+                color: ColorRes.black,
+                strokeWidth: 2.5,
+              ),
+              GlobalText(
+                str: 'Loading..',
+                fontSize: 12,
+                fontWeight: FontWeight.bold,
+              )
             ],
           ),
         ),
