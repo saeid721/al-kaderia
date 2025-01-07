@@ -11,16 +11,15 @@ final locator = GetIt.instance;
 Future<void> init(LocalStorage localStorage) async {
   final prefs = localStorage.sharedPreference;
 
-  // ==# Register dependencies with GetIt for core services
+  // Register dependencies with GetIt
   locator.registerLazySingleton<LocalStorage>(() => localStorage);
   locator.registerLazySingleton<RequestHandler>(() => RequestHandler(dio: Dio()));
   locator.registerLazySingleton<StorageController>(() => StorageController(prefs: prefs));
 
-  // ==# Register GetIt services within GetX for further access
+  // Ensure all dependencies are available before GetX registration
   Get.lazyPut(() => AuthController(), fenix: true);
-
   Get.lazyPut(() => locator<RequestHandler>(), fenix: true);
   Get.lazyPut(() => locator<StorageController>(), fenix: true);
-
 }
+
 

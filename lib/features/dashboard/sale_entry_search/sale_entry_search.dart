@@ -20,15 +20,14 @@ class SaleEntrySearchScreen extends StatefulWidget {
 class _SaleEntrySearchScreenState extends State<SaleEntrySearchScreen> {
 
   final GlobalKey<ScaffoldState> drawerKey = GlobalKey<ScaffoldState>();
-  TextEditingController discountAmountCon = TextEditingController();
-  TextEditingController percentCon = TextEditingController();
-  TextEditingController tokenNoCon = TextEditingController();
-  TextEditingController  paidAmountCon = TextEditingController();
-  TextEditingController  noteCon = TextEditingController();
 
-  String selectProduct = "Select Addons";
-  String selectType = "Select Type";
-  String payment = "Select Payment";
+  TextEditingController fromDateCon = TextEditingController();
+  TextEditingController toDateCon = TextEditingController();
+  TextEditingController invoiceCon = TextEditingController();
+  TextEditingController  paidAmountCon = TextEditingController();
+
+  String selectDiscountStatus = "0";
+  String selectPaymentMode = "0";
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +71,7 @@ class _SaleEntrySearchScreenState extends State<SaleEntrySearchScreen> {
                             children: [
                               Expanded(
                                 child: GlobalTextFormField(
-                                  controller: discountAmountCon,
+                                  controller: fromDateCon,
                                   titleText: 'From (Date)',
                                   hintText: 'From (Date)',
                                   decoration: borderDecoration,
@@ -82,7 +81,7 @@ class _SaleEntrySearchScreenState extends State<SaleEntrySearchScreen> {
                               sizeBoxW(5),
                               Expanded(
                                 child: GlobalTextFormField(
-                                  controller: percentCon,
+                                  controller: toDateCon,
                                   titleText: 'To (Date)',
                                   hintText: 'To (Date)',
                                   decoration: borderDecoration,
@@ -97,7 +96,7 @@ class _SaleEntrySearchScreenState extends State<SaleEntrySearchScreen> {
                             children: [
                               Expanded(
                                 child: GlobalTextFormField(
-                                  controller: tokenNoCon,
+                                  controller: invoiceCon,
                                   titleText: 'Invoice(Bill No)',
                                   hintText: 'Invoice(Bill No)',
                                   decoration: borderDecoration,
@@ -107,7 +106,7 @@ class _SaleEntrySearchScreenState extends State<SaleEntrySearchScreen> {
                               sizeBoxW(5),
                               Expanded(
                                 child: GlobalSmallSearchTextFormField(
-                                  text: selectType,
+                                  text: selectDiscountStatus,
                                   titleText: "Discount Status",
                                   vertical: 10,
                                   color: ColorRes.black,
@@ -134,7 +133,7 @@ class _SaleEntrySearchScreenState extends State<SaleEntrySearchScreen> {
                               sizeBoxW(5),
                               Expanded(
                                 child: GlobalSmallSearchTextFormField(
-                                  text: payment,
+                                  text: selectPaymentMode,
                                   titleText: "Payment Mode",
                                   vertical: 10,
                                   color: ColorRes.black,

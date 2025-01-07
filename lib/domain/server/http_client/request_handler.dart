@@ -85,7 +85,7 @@ class RequestHandler extends GetxController {
           ? jsonDecode(response.data)
           : response.data;
 
-      ApiCheckerDec.checkApi(responseData['status'], responseData['message']);
+      ApiCheckerDec.checkApi(responseData['success'], responseData['message']);
       return responseData;
     } on DioException catch (error, stackTrace) {
       final responseData = error.response?.data is String
@@ -95,7 +95,7 @@ class RequestHandler extends GetxController {
       throw RequestException(
           method: "/POST",
           url: baseUrl ?? mainUrl + url,
-          statusCode: responseData['status'],
+          statusCode: responseData['success'],
           message: responseData['message'],
           data: params,
           error: error,

@@ -1,5 +1,5 @@
 class LogInModel {
-  bool? success;
+  int? success;
   String? message;
   Data? data;
 

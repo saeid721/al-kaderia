@@ -31,9 +31,9 @@ class AuthController extends GetxController implements GetxService {
       _hasError = false;
       update();
 
-      final response = await repository.reqLogIn(phone: email, password: password);
+      final response = await repository.reqLogIn(email: email, password: password);
 
-      if (response.success == 2) {
+      if (response.success == 200) {
         logInModel = response;
         // locator<LocalStorage>().setString(key: StorageKeys.accessToken, value: logInModel?.token?.toString() ?? '');
         Get.offAll(() => const DashboardScreen());

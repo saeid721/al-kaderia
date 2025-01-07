@@ -27,6 +27,7 @@ class Images {
   //::::::::::::::::::::::::: App Logo
   static const String delete = 'assets/icons/delete.png';
   static const String emptyIc = 'assets/images/logo.png';
+  static const String logoutIc = 'assets/icons/logout.png';
 
 
   // ==/@ Dummy Image

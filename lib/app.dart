@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'domain/local/preferences/local_storage.dart';
 import 'domain/server/http_client/app_config.dart';
 import 'features/splash/splash_screen.dart';
+import 'getit_locator.dart';
 import 'global/constants/enum.dart';
 
 class MyApp extends StatefulWidget {
@@ -27,7 +28,7 @@ class _MyAppState extends State<MyApp> {
     LocalStorage localStorage = LocalStorage();
     AppUrlExtention.setUrl(UrlLink.isDev);
     await localStorage.initLocalStorage();
-    //await init(localStorage);
+    await init(localStorage);
   }
 
   @override

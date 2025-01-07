@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import '../../../../global/constants/images.dart';
 import '../../../../global/constants/input_decoration.dart';
 import '../../../../global/utils/show_toast.dart';
-import '../../../../global/widget/couple_text_button.dart';
 import '../../../../global/widget/global_container.dart';
 import '../../../../global/widget/global_image_loader.dart';
 import '../../../../global/widget/global_sizedbox.dart';
@@ -12,7 +11,6 @@ import '../../../../global/widget/global_textform_field.dart';
 import '../../base_widget/custom_appbar.dart';
 import '../../base_widget/global_button.dart';
 import '../controller/auth_controller.dart';
-import 'signup_screen.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -24,8 +22,8 @@ class SignInScreen extends StatefulWidget {
 class _SignInScreenState extends State<SignInScreen> {
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  TextEditingController emailCon = TextEditingController();
-  TextEditingController passCon = TextEditingController();
+  TextEditingController emailCon = TextEditingController(text: "asif@gmail.com");
+  TextEditingController passCon = TextEditingController(text: "123456");
 
   @override
   Widget build(BuildContext context) {
@@ -101,18 +99,18 @@ class _SignInScreenState extends State<SignInScreen> {
                                 }
                             ),
                             sizeBoxH(20),
-                            GestureDetector(
-                              onTap: () {
-                                Get.to(()=> const SignUpScreen());
-                              },
-                              child: const Align(
-                                alignment: Alignment.center,
-                                child: CoupleTextButton(
-                                    firstText: "Don't have and any account? ",
-                                    secondText: "Sign Up"),
-                              ),
-                            ),
-                            sizeBoxH(20)
+                            // GestureDetector(
+                            //   onTap: () {
+                            //     Get.to(()=> const SignUpScreen());
+                            //   },
+                            //   child: const Align(
+                            //     alignment: Alignment.center,
+                            //     child: CoupleTextButton(
+                            //         firstText: "Don't have and any account? ",
+                            //         secondText: "Sign Up"),
+                            //   ),
+                            // ),
+                            // sizeBoxH(20)
                           ],
                         ),
                       ),
