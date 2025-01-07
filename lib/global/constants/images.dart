@@ -20,6 +20,7 @@ class Images {
   static const String scanner = 'assets/icons/scanner.png';
   static const String eye1 = 'assets/icons/eye1.png';
   static const String eye2 = 'assets/icons/eye2.png';
+  static const String printing = 'assets/icons/printing.png';
   static const String confirmIcon = 'assets/icons/privacy_policy.png';
 
   static const String whatsAppLogo = 'assets/icons/whatsapp.png';

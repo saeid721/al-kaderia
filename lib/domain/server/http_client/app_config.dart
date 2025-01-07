@@ -9,7 +9,7 @@ enum AppConfig {
   baseImage,
   logInUrl,
   logOutUrl,
-  registrationUrl,
+  paymentModeUrl,
 
   // =======================/@ Al-Kaderia Panel @/=====================
 
@@ -52,8 +52,8 @@ extension AppUrlExtention on AppConfig {
         return '/Api/SalesApi/login';
       case AppConfig.logOutUrl:
         return '/Api/SalesApi/logout';
-      case AppConfig.registrationUrl:
-        return '/Api/SalesApi/register';
+      case AppConfig.paymentModeUrl:
+        return '/Api/SalesApi/fund';
 
       default:
     }

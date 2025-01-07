@@ -100,3 +100,58 @@ InputDecoration borderDecoration = InputDecoration(
   ),
 
 );
+
+InputDecoration dateInputDecoration = InputDecoration(
+  fillColor: ColorRes.white,
+  filled: true,
+  isDense: true,
+  iconColor: ColorRes.grey,
+  floatingLabelBehavior: FloatingLabelBehavior.always,
+  // labelStyle: const TextStyle(
+  //   color: ColorRes.black,
+  // ),
+  // floatingLabelStyle: const TextStyle(color: ColorRes.blue),
+  border: OutlineInputBorder(
+    borderSide: const BorderSide(
+      width: 1,
+      color: ColorRes.grey,
+    ),
+    borderRadius: BorderRadius.circular(8),
+  ),
+  errorBorder: OutlineInputBorder(
+    borderSide: const BorderSide(
+      width: 1,
+      color: ColorRes.red,
+    ),
+    borderRadius: BorderRadius.circular(8),
+  ),
+  focusedErrorBorder: OutlineInputBorder(
+    borderSide: const BorderSide(
+      width: 1,
+      color: ColorRes.red,
+    ),
+    borderRadius: BorderRadius.circular(8),
+  ),
+  focusedBorder: OutlineInputBorder(
+    borderSide: const BorderSide(
+      width: 1,
+      color: ColorRes.grey,
+    ),
+    borderRadius: BorderRadius.circular(8),
+  ),
+  enabledBorder: OutlineInputBorder(
+    borderSide: const BorderSide(
+      width: 1,
+      color: ColorRes.grey,
+    ),
+    borderRadius: BorderRadius.circular(8),
+  ),
+  disabledBorder: OutlineInputBorder(
+    borderSide: const BorderSide(
+      width: 1,
+      color: ColorRes.grey,
+    ),
+    borderRadius: BorderRadius.circular(8),
+  ),
+  suffixIconColor: ColorRes.grey,
+);
