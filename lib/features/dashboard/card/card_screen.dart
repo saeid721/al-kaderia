@@ -1,4 +1,5 @@
 
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../../../global/widget/global_sizedbox.dart';
@@ -30,8 +31,9 @@ class _CardScreenState extends State<CardScreen> {
   TextEditingController  noteCon = TextEditingController();
 
   String selectProduct = "Select Addons";
-  String selectType = "Select Type";
   String payment = "Select Payment";
+  String selectType = "Select Type";
+  String selectWaiterData = "0";
 
   @override
   void initState() {
@@ -655,7 +657,35 @@ class _CardScreenState extends State<CardScreen> {
                                   ),
                                 ],
                               ),
+                              sizeBoxH(10),
+                              GlobalSearchTextFormField(
+                                text: salesReportController.selectWaiterData,
+                                color: salesReportController.selectWaiterDataIndex > -1 ? ColorRes.black : ColorRes.grey,
+                                item: salesReportController.selectWaiterList ?? [],
+                                onSelect: (val) async {
+                                  setState(() {
+                                    Get.back();
 
+                                    salesReportController.selectWaiterDataIndex = val;
+                                    salesReportController.selectWaiterData = salesReportController.selectWaiterList![val];
+
+                                    final waiterType = salesReportController
+                                        .categoryData?[salesReportController.selectWaiterList!.indexOf(
+                                        salesReportController.selectWaiterData)]
+                                        .categoryId
+                                        ?.toString();
+
+                                    log('Drop Main Id: $waiterType');
+
+                                    if (waiterType != null) {
+                                      selectType = waiterType;
+                                      salesReportController.getWaiterList();
+                                    } else {
+                                      log('Drop Id: $selectType');
+                                    }
+                                  });
+                                },
+                              ),
                               sizeBoxH(10),
                               GlobalTextFormField(
                                 controller: noteCon,
