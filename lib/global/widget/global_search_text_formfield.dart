@@ -42,7 +42,7 @@ class GlobalSearchTextFormField extends StatelessWidget {
           style: titleStyle
               ?? const TextStyle(
                   color: ColorRes.deep100,
-                  fontSize: 16,
+                  fontSize: 12,
                   fontWeight: FontWeight.w700,
                   fontFamily: 'Rubik'
               ),
@@ -210,7 +210,7 @@ class _GlobalSearchTextFormFieldWidgetState extends State<GlobalSearchTextFormFi
                           margin: const EdgeInsets.symmetric(vertical: 2),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(5),
-                            color: ColorRes.grey.withOpacity(0.2),
+                            color: ColorRes.grey.withAlpha((0.2 * 255).toInt()),
                           ),
                           child: GlobalText(
                             str: tempDataList[index],
@@ -431,7 +431,7 @@ class _GlobalSmallSearchTextFormFieldWidgetState extends State<GlobalSmallSearch
                           margin: const EdgeInsets.symmetric(vertical: 2),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(5),
-                            color: ColorRes.grey.withOpacity(0.2),
+                            color: ColorRes.grey.withAlpha((0.2 * 255).toInt()),
                           ),
                           child: GlobalText(
                             str: tempDataList[index],

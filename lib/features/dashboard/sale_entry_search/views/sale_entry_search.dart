@@ -8,10 +8,8 @@ import '../../../../../global/widget/global_container.dart';
 import '../../../../../global/widget/global_search_text_formfield.dart';
 import '../../../../../global/widget/global_textform_field.dart';
 import '../../../../global/constants/date_time_formatter.dart';
-import '../../../../global/constants/images.dart';
 import '../../../../global/method/show_date_time_picker.dart';
 import '../../../../global/utils/show_toast.dart';
-import '../../../../global/widget/global_image_loader.dart';
 import '../../../../global/widget/global_text.dart';
 import '../../../base_widget/custom_appbar.dart';
 import '../../../base_widget/global_button.dart';
@@ -27,13 +25,12 @@ class SaleEntrySearchScreen extends StatefulWidget {
 }
 
 class _SaleEntrySearchScreenState extends State<SaleEntrySearchScreen> {
-
   final GlobalKey<ScaffoldState> drawerKey = GlobalKey<ScaffoldState>();
 
   TextEditingController selectFromDate = TextEditingController();
   TextEditingController selectToDate = TextEditingController();
   TextEditingController invoiceCon = TextEditingController();
-  TextEditingController  amountCon = TextEditingController();
+  TextEditingController amountCon = TextEditingController();
 
   String selectPaymentMode = "0";
   String selectDiscountStatus = "Select One";
@@ -54,321 +51,290 @@ class _SaleEntrySearchScreenState extends State<SaleEntrySearchScreen> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<SalesReportController>(builder: (salesReportController) {
-        return Scaffold(
-            appBar: const PreferredSize(
-                preferredSize: Size.fromHeight(60),
-                child: GlobalAppBar(
-                  title: 'Sales Report (Invoice)',
-                )
-            ),
-            body: GlobalContainer(
-                height: size(context).height,
-                width: size(context).width,
-                color: Colors.white,
-                child: NotificationListener<OverscrollIndicatorNotification>(
-                  onNotification: (overScroll){
-                    overScroll.disallowIndicator();
-                    return true;
-                  },
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        sizeBoxH(20),
-                        Container(
-                          width: Get.width,
-                          margin: const EdgeInsets.symmetric(horizontal: 10),
-                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              color: ColorRes.white,
-                              boxShadow: [
-                                BoxShadow(
-                                    color: ColorRes.grey.withOpacity(0.3),
-                                    blurRadius: 5
-                                )
-                              ]
-                          ),
+      return Scaffold(
+          appBar: const PreferredSize(
+              preferredSize: Size.fromHeight(60),
+              child: GlobalAppBar(
+                title: 'Sales Report (Invoice)',
+              )),
+          body: GlobalContainer(
+              height: size(context).height,
+              width: size(context).width,
+              color: Colors.white,
+              child: NotificationListener<OverscrollIndicatorNotification>(
+                onNotification: (overScroll) {
+                  overScroll.disallowIndicator();
+                  return true;
+                },
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      sizeBoxH(20),
+                      Container(
+                        width: Get.width,
+                        margin: const EdgeInsets.symmetric(horizontal: 10),
+                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(5), color: ColorRes.white, boxShadow: [BoxShadow(color: ColorRes.grey.withAlpha((0.3 * 255).toInt()), blurRadius: 5)]),
+                        child: Column(
+                          children: [
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: GlobalTextFormField(
+                                    controller: selectFromDate,
+                                    titleText: "From (Date)",
+                                    decoration: dateInputDecoration,
+                                    prefixIcon: GestureDetector(
+                                        onTap: () async {
+                                          var pickedDate = await showDateOnlyPicker(context);
+                                          setState(() {
+                                            String formatedDate = DateTimeFormatter.showDateOnly.format(pickedDate);
+                                            selectFromDate.text = formatedDate;
+                                            salesReportController.getPaymentModeList();
+                                          });
+                                        },
+                                        child: const Icon(Icons.calendar_month_outlined, color: ColorRes.grey, size: 20)),
+                                    isDense: true,
+                                  ),
+                                ),
+                                sizeBoxW(5),
+                                Expanded(
+                                  child: GlobalTextFormField(
+                                    controller: selectToDate,
+                                    titleText: "To (Date)",
+                                    decoration: dateInputDecoration,
+                                    prefixIcon: GestureDetector(
+                                        onTap: () async {
+                                          var pickedDate = await showDateOnlyPicker(context);
+                                          setState(() {
+                                            String formatedDate = DateTimeFormatter.showDateOnly.format(pickedDate);
+                                            selectToDate.text = formatedDate;
+                                            salesReportController.getPaymentModeList();
+                                          });
+                                        },
+                                        child: const Icon(Icons.calendar_month_outlined, color: ColorRes.grey, size: 20)),
+                                    isDense: true,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            sizeBoxH(10),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: GlobalTextFormField(
+                                    controller: invoiceCon,
+                                    titleText: 'Invoice(Bill No)',
+                                    hintText: 'Invoice(Bill No)',
+                                    decoration: borderDecoration,
+                                    isDense: true,
+                                  ),
+                                ),
+                                sizeBoxW(5),
+                                Expanded(
+                                  child: GlobalSmallSearchTextFormField(
+                                    text: selectDiscountStatus,
+                                    titleText: "Discount Status",
+                                    vertical: 10,
+                                    color: ColorRes.black,
+                                    item: selectDiscountStatusList,
+                                    onSelect: (val) async {
+                                      setState(() {
+                                        selectDiscountStatus = selectDiscountStatusList[val];
+                                        log("Value: $selectDiscountStatus");
+                                      });
+                                      Get.back();
+                                    },
+                                  ),
+                                ),
+                              ],
+                            ),
+                            sizeBoxH(10),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: GlobalTextFormField(
+                                    controller: amountCon,
+                                    titleText: 'Amount',
+                                    hintText: 'Amount',
+                                    decoration: borderDecoration,
+                                    isDense: true,
+                                  ),
+                                ),
+                                sizeBoxW(5),
+                                Expanded(
+                                  child: GlobalSearchTextFormField(
+                                    titleText: 'Payment Mode',
+                                    text: salesReportController.selectPaymentMode,
+                                    color: salesReportController.selectPaymentModeIndex > -1 ? ColorRes.black : ColorRes.grey,
+                                    item: salesReportController.selectPaymentModeList ?? [], // List of items
+                                    onSelect: (val) async {
+                                      setState(() {
+                                        Get.back();
+
+                                        salesReportController.selectPaymentModeIndex = val;
+
+                                        salesReportController.selectPaymentMode = salesReportController.selectPaymentModeList![val];
+
+                                        final paymentType = salesReportController.paymentModeData?[salesReportController.selectPaymentModeList!.indexOf(salesReportController.selectPaymentMode)].fundId?.toString();
+
+                                        log('Drop Main Id: $paymentType');
+
+                                        if (paymentType != null) {
+                                          selectPaymentMode = paymentType;
+                                          salesReportController.getPaymentModeList();
+                                        } else {
+                                          log('Drop Id: $selectPaymentMode');
+                                        }
+                                      });
+                                    },
+                                  ),
+                                ),
+                              ],
+                            ),
+                            sizeBoxH(30),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 10),
+                              child: GlobalButtonWidget(
+                                  str: 'Search',
+                                  height: 45,
+                                  onTap: () async {
+                                    if (selectPaymentMode != "0") {
+                                      if (amountCon.text.isNotEmpty) {
+                                        if (selectFromDate.text.isNotEmpty) {
+                                          if (selectToDate.text.isNotEmpty) {
+                                            await salesReportController.getPaymentModeList();
+                                          } else {
+                                            showCustomSnackBar("To Date Is Required");
+                                          }
+                                        } else {
+                                          showCustomSnackBar("From Date Is Required");
+                                        }
+                                      } else {
+                                        showCustomSnackBar("Amount Is Required");
+                                      }
+                                    } else {
+                                      showCustomSnackBar("Payment Mode Is Required");
+                                    }
+                                  }),
+                            ),
+                          ],
+                        ),
+                      ),
+                      sizeBoxH(30),
+                      Container(
+                        width: Get.width,
+                        color: ColorRes.white,
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 15, right: 15),
                           child: Column(
                             children: [
-                              Row(
+                              const Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   Expanded(
-                                    child: GlobalTextFormField(
-                                      controller: selectFromDate,
-                                      titleText: "From (Date)",
-                                      decoration: dateInputDecoration,
-                                      prefixIcon: GestureDetector(
-                                          onTap: () async{
-                                            var pickedDate = await showDateOnlyPicker(context);
-                                            setState(() {
-                                              String formatedDate = DateTimeFormatter.showDateOnly.format(pickedDate);
-                                              selectFromDate.text = formatedDate;
-                                              salesReportController.getPaymentModeList();
-                                            });
-                                          },
-                                          child: const Icon(Icons.calendar_month_outlined, color: ColorRes.grey, size: 20)
-                                      ),
-                                      isDense: true,
+                                    child: Row(
+                                      children: [
+                                        Icon(
+                                          Icons.calendar_month_outlined,
+                                          size: 22,
+                                          color: ColorRes.grey,
+                                        ),
+                                        GlobalText(
+                                          str: "20/01/2025",
+                                          color: ColorRes.deep300,
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w500,
+                                          fontFamily: 'Roboto',
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                  sizeBoxW(5),
                                   Expanded(
-                                    child: GlobalTextFormField(
-                                      controller: selectToDate,
-                                      titleText: "To (Date)",
-                                      decoration: dateInputDecoration,
-                                      prefixIcon: GestureDetector(
-                                          onTap: () async{
-                                            var pickedDate = await showDateOnlyPicker(context);
-                                            setState(() {
-                                              String formatedDate = DateTimeFormatter.showDateOnly.format(pickedDate);
-                                              selectToDate.text = formatedDate;
-                                              salesReportController.getPaymentModeList();
-                                            });
-                                          },
-                                          child: const Icon(Icons.calendar_month_outlined, color: ColorRes.grey, size: 20)
-                                      ),
-                                      isDense: true,
+                                    child: Row(
+                                      children: [
+                                        Icon(
+                                          Icons.calendar_month_outlined,
+                                          size: 22,
+                                          color: ColorRes.grey,
+                                        ),
+                                        GlobalText(
+                                          str: "20/01/2025",
+                                          color: ColorRes.deep300,
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w500,
+                                          fontFamily: 'Roboto',
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                ],
-                              ),
-
-                              sizeBoxH(10),
-                              Row(
-                                children: [
                                   Expanded(
-                                    child: GlobalTextFormField(
-                                      controller: invoiceCon,
-                                      titleText: 'Invoice(Bill No)',
-                                      hintText: 'Invoice(Bill No)',
-                                      decoration: borderDecoration,
-                                      isDense: true,
-                                    ),
-                                  ),
-                                  sizeBoxW(5),
-                                  Expanded(
-                                    child: GlobalSmallSearchTextFormField(
-                                      text: selectDiscountStatus,
-                                      titleText: "Discount Status",
-                                      vertical: 10,
-                                      color: ColorRes.black,
-                                      item: selectDiscountStatusList,
-                                      onSelect: (val) async{
-                                        setState(() {
-                                          selectDiscountStatus = selectDiscountStatusList[val];
-                                          log("Value: $selectDiscountStatus");
-                                        });
-                                        Get.back();
-                                      },
-                                    ),
-                                  ),
-
-                                ],
-                              ),
-
-                              sizeBoxH(10),
-                              Row(
-                                children: [
-                                  Expanded(
-                                    child: GlobalTextFormField(
-                                      controller: amountCon,
-                                      titleText: 'Amount',
-                                      hintText: 'Amount',
-                                      decoration: borderDecoration,
-                                      isDense: true,
-                                    ),
-                                  ),
-                                  sizeBoxW(5),
-                                  Expanded(
-                                    child: GlobalSearchTextFormField(
-                                      titleText: 'Payment Mode',
-                                      text: salesReportController.selectPaymentMode,
-                                      color: salesReportController.selectPaymentModeIndex > -1 ? ColorRes.black : ColorRes.grey,
-                                      item: salesReportController.selectPaymentModeList ?? [], // List of items
-                                      onSelect: (val) async {
-                                        setState(() {
-                                          Get.back();
-
-                                          salesReportController.selectPaymentModeIndex = val;
-
-                                          salesReportController.selectPaymentMode =
-                                          salesReportController.selectPaymentModeList![val];
-
-                                          final paymentType = salesReportController.paymentModeData?[
-                                          salesReportController.selectPaymentModeList!.indexOf(
-                                              salesReportController.selectPaymentMode)
-                                          ].fundId?.toString();
-
-                                          log('Drop Main Id: $paymentType');
-
-                                          if (paymentType != null) {
-                                            selectPaymentMode = paymentType;
-                                            salesReportController.getPaymentModeList();
-                                          } else {
-                                            log('Drop Id: $selectPaymentMode');
-                                          }
-                                        });
-                                      },
-                                    ),
-                                  ),
-
-                                  ],
-                              ),
-                            ],
-                          ),
-                        ),
-
-                        sizeBoxH(30),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10),
-                          child: GlobalButtonWidget(
-                              str: 'Search',
-                              height: 45,
-                            onTap: () async{
-                              if(selectPaymentMode != "0"){
-                                if(amountCon.text.isNotEmpty){
-                                  if(selectFromDate.text.isNotEmpty){
-                                    if(selectToDate.text.isNotEmpty){
-                                      await salesReportController.getPaymentModeList();
-                                    } else{
-                                      showCustomSnackBar("To Date Is Required");
-                                    }
-                                  } else{
-                                    showCustomSnackBar("From Date Is Required");
-                                  }
-                                }else{
-                                  showCustomSnackBar("Amount Is Required");
-                                }
-                              }else{
-                              showCustomSnackBar("Payment Mode Is Required");
-                              }
-                            }
-                          ),
-                        ),
-                        sizeBoxH(30),
-
-                        const Padding(
-                          padding: EdgeInsets.only(left: 15, right: 15),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Expanded(
-                                child: Row(
-                                  children: [
-                                  Icon(
-                                  Icons.calendar_month_outlined,
-                                  size: 30,
-                                  color: ColorRes.grey,
-                                ),
-                                GlobalText(
-                                  str: "20/01/2025",
-                                  color: ColorRes.deep300,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600,
-                                  fontFamily: 'Roboto',
-                                  overflow: TextOverflow.ellipsis,
-                                  ),
-                                  ]
-                                ),
-                              ),
-                              Expanded(
-                                child: Row(
-                                    children: [
-                                      Icon(
-                                        Icons.calendar_month_outlined,
-                                        size: 30,
-                                        color: ColorRes.grey,
-                                      ),
-                                      GlobalText(
-                                        str: "20/01/2025",
-                                        color: ColorRes.deep300,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w600,
-                                        fontFamily: 'Roboto',
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                    ]
-                                ),
-                              ),
-                              Expanded(
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
+                                    child: Row(mainAxisAlignment: MainAxisAlignment.end, children: [
                                       Icon(
                                         Icons.attach_money_outlined,
-                                        size: 34,
+                                        size: 22,
                                         color: ColorRes.grey,
                                       ),
                                       GlobalText(
                                         str: "350.00",
                                         color: ColorRes.deep300,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w600,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w500,
                                         fontFamily: 'Roboto',
                                         overflow: TextOverflow.ellipsis,
                                       ),
-                                    ]
-                                ),
+                                    ]),
+                                  ),
+                                ],
                               ),
-
-                            ],
-                          ),
-                        ),
-
-                        Padding(
-                          padding: const EdgeInsets.only(left: 15, right: 15, bottom: 15, top: 5),
-                          child: Column(
-                            children: [
-                              const SaleSummeryTableTabBarWidget(
-                                firstRow: 'SL',
-                                secondRow: 'Date',
-                                thirdRow: 'Invoice',
-                                fourRow: 'Total',
-                                fiveRow: 'Discount',
-                                sixRow: 'Final',
-                                sevenRow: 'Paid',
-                                eightRow: 'Action',
-                              ),
-                              ListView.builder(
-                                  shrinkWrap: true,
-                                  itemCount: 2,
-                                  physics: const NeverScrollableScrollPhysics(),
-                                  itemBuilder: (ctx, index){
-                                    return SaleSummeryTableListValueWidget(
-                                      firstColumn: '01',
-                                      secondColumn: '07-01-2025',
-                                      thirdColumn: '3250107053806',
-                                      fourColumn: '415',
-                                      fiveColumn: '0',
-                                      sixColumn: '436',
-                                      sevenColumn: '436.00',
-                                      eightColumn: '',
-                                      onTap: (){
-                                        Get.to(() => InvoiceDetailsScreen());
-                                      },
-                                      onTapPrint: () {
-
-                                      },
-
-                                    );
-                                  }
+                              sizeBoxH(5),
+                              Column(
+                                children: [
+                                  const SaleSummeryTableTabBarWidget(
+                                    firstRow: 'SL',
+                                    secondRow: 'Date',
+                                    thirdRow: 'Invoice',
+                                    fourRow: 'Total',
+                                    fiveRow: 'Discount',
+                                    sixRow: 'Final',
+                                    sevenRow: 'Paid',
+                                    eightRow: 'Action',
+                                  ),
+                                  ListView.builder(
+                                      shrinkWrap: true,
+                                      itemCount: 2,
+                                      physics: const NeverScrollableScrollPhysics(),
+                                      itemBuilder: (ctx, index) {
+                                        return SaleSummeryTableListValueWidget(
+                                          firstColumn: '01',
+                                          secondColumn: '07-01-2025',
+                                          thirdColumn: '3250107053806',
+                                          fourColumn: '415',
+                                          fiveColumn: '0',
+                                          sixColumn: '436',
+                                          sevenColumn: '436.00',
+                                          eightColumn: '',
+                                          onTap: () {
+                                            Get.to(() => InvoiceDetailsScreen());
+                                          },
+                                          onTapPrint: () {},
+                                        );
+                                      }),
+                                ],
                               ),
                             ],
                           ),
                         ),
-                        sizeBoxH(5),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                )
-            )
-        );
-      }
-    );
+                ),
+              )));
+    });
   }
 }
-
 
 // import 'package:flutter/material.dart';
 // import 'package:get/get.dart';

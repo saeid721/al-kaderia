@@ -40,7 +40,7 @@ class SaleSummeryTableTabBarWidget extends StatelessWidget {
             topLeft: Radius.circular(8),
             topRight: Radius.circular(8),
           ),
-          color: ColorRes.primaryColor.withOpacity(0.2),
+          color: ColorRes.primaryColor.withAlpha((0.2 * 255).toInt()),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -48,6 +48,21 @@ class SaleSummeryTableTabBarWidget extends StatelessWidget {
           Container(
             width: 40,
             padding: const EdgeInsets.symmetric(horizontal: 5),
+            decoration: BoxDecoration(
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(8),
+                ),
+                border: Border(
+                    left: BorderSide(
+                        color: ColorRes.primaryColor.withAlpha((0.3 * 255).toInt()),
+                        width: 1
+                    ),
+                    bottom: BorderSide(
+                        color: ColorRes.primaryColor.withAlpha((0.3 * 255).toInt()),
+                        width: 1
+                    )
+                )
+            ),
             child: Center(
               child: GlobalText(
                 str: firstRow,
@@ -63,6 +78,22 @@ class SaleSummeryTableTabBarWidget extends StatelessWidget {
           Expanded(
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 5),
+              decoration: BoxDecoration(
+                  border: Border(
+                    left: BorderSide(
+                        color: ColorRes.primaryColor.withAlpha((0.3 * 255).toInt()),
+                        width: 1
+                    ),
+                      bottom: BorderSide(
+                          color: ColorRes.primaryColor.withAlpha((0.3 * 255).toInt()),
+                          width: 1
+                      ),
+                    right: BorderSide(
+                        color: ColorRes.primaryColor.withAlpha((0.3 * 255).toInt()),
+                        width: 1
+                    ),
+                  )
+              ),
               child: Center(
                 child: Align(
                   alignment: Alignment.centerLeft,
@@ -82,6 +113,18 @@ class SaleSummeryTableTabBarWidget extends StatelessWidget {
           Expanded(
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 5),
+              decoration: BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(
+                        color: ColorRes.primaryColor.withAlpha((0.3 * 255).toInt()),
+                        width: 1
+                    ),
+                    right: BorderSide(
+                        color: ColorRes.primaryColor.withAlpha((0.3 * 255).toInt()),
+                        width: 1
+                    ),
+                  )
+              ),
               child: Center(
                 child: Align(
                   alignment: Alignment.centerLeft,
@@ -102,6 +145,18 @@ class SaleSummeryTableTabBarWidget extends StatelessWidget {
           Expanded(
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 5),
+              decoration: BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(
+                        color: ColorRes.primaryColor.withAlpha((0.3 * 255).toInt()),
+                        width: 1
+                    ),
+                    right: BorderSide(
+                        color: ColorRes.primaryColor.withAlpha((0.3 * 255).toInt()),
+                        width: 1
+                    ),
+                  )
+              ),
               child: Center(
                 child: Align(
                   alignment: Alignment.centerLeft,
@@ -121,6 +176,18 @@ class SaleSummeryTableTabBarWidget extends StatelessWidget {
           Expanded(
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 5),
+              decoration: BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(
+                        color: ColorRes.primaryColor.withAlpha((0.3 * 255).toInt()),
+                        width: 1
+                    ),
+                    right: BorderSide(
+                        color: ColorRes.primaryColor.withAlpha((0.3 * 255).toInt()),
+                        width: 1
+                    ),
+                  )
+              ),
               child: Center(
                 child: Align(
                   alignment: Alignment.centerLeft,
@@ -140,6 +207,18 @@ class SaleSummeryTableTabBarWidget extends StatelessWidget {
           Expanded(
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 5),
+              decoration: BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(
+                        color: ColorRes.primaryColor.withAlpha((0.3 * 255).toInt()),
+                        width: 1
+                    ),
+                    right: BorderSide(
+                        color: ColorRes.primaryColor.withAlpha((0.3 * 255).toInt()),
+                        width: 1
+                    ),
+                  )
+              ),
               child: Center(
                 child: Align(
                   alignment: Alignment.centerLeft,
@@ -159,6 +238,18 @@ class SaleSummeryTableTabBarWidget extends StatelessWidget {
           Expanded(
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 5),
+              decoration: BoxDecoration(
+                  border: Border(
+                      right: BorderSide(
+                          color: ColorRes.primaryColor.withAlpha((0.3 * 255).toInt()),
+                          width: 1
+                      ),
+                      bottom: BorderSide(
+                          color: ColorRes.primaryColor.withAlpha((0.3 * 255).toInt()),
+                          width: 1
+                      )
+                  )
+              ),
               child: Center(
                 child: Align(
                   alignment: Alignment.centerLeft,
@@ -178,14 +269,17 @@ class SaleSummeryTableTabBarWidget extends StatelessWidget {
           Container(
             width: 50,
             padding: const EdgeInsets.symmetric(horizontal: 5),
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
+                borderRadius: const BorderRadius.only(
+                  topRight: Radius.circular(8),
+                ),
                 border: Border(
                     right: BorderSide(
-                        color: ColorRes.blue100,
+                        color: ColorRes.primaryColor.withAlpha((0.3 * 255).toInt()),
                         width: 1
                     ),
                     bottom: BorderSide(
-                        color: ColorRes.blue100,
+                        color: ColorRes.primaryColor.withAlpha((0.3 * 255).toInt()),
                         width: 1
                     )
                 )
@@ -255,14 +349,14 @@ class SaleSummeryTableListValueWidget extends StatelessWidget {
             Container(
               width: 40,
               padding: const EdgeInsets.symmetric(horizontal: 5),
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                   border: Border(
                       left: BorderSide(
-                          color: ColorRes.blue100,
+                          color: ColorRes.primaryColor.withAlpha((0.3 * 255).toInt()),
                           width: 1
                       ),
                       bottom: BorderSide(
-                          color: ColorRes.blue100,
+                          color: ColorRes.primaryColor.withAlpha((0.3 * 255).toInt()),
                           width: 1
                       )
                   )
@@ -282,18 +376,18 @@ class SaleSummeryTableListValueWidget extends StatelessWidget {
             ),
             Expanded(
               child: Container(
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                     border: Border(
                         left: BorderSide(
-                            color: ColorRes.blue100,
+                            color: ColorRes.primaryColor.withAlpha((0.3 * 255).toInt()),
                             width: 1
                         ),
                         bottom: BorderSide(
-                            color: ColorRes.blue100,
+                            color: ColorRes.primaryColor.withAlpha((0.3 * 255).toInt()),
                             width: 1
                         ),
                         right: BorderSide(
-                            color: ColorRes.blue100,
+                            color: ColorRes.primaryColor.withAlpha((0.3 * 255).toInt()),
                             width: 1
                         )
                     )
@@ -316,14 +410,14 @@ class SaleSummeryTableListValueWidget extends StatelessWidget {
             Expanded(
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 5),
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                     border: Border(
                         bottom: BorderSide(
-                            color: ColorRes.blue100,
+                            color: ColorRes.primaryColor.withAlpha((0.3 * 255).toInt()),
                             width: 1
                         ),
                         right: BorderSide(
-                            color: ColorRes.blue100,
+                            color: ColorRes.primaryColor.withAlpha((0.3 * 255).toInt()),
                             width: 1
                         )
                     )
@@ -347,14 +441,14 @@ class SaleSummeryTableListValueWidget extends StatelessWidget {
             Expanded(
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 5),
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                     border: Border(
                         bottom: BorderSide(
-                            color: ColorRes.blue100,
+                            color: ColorRes.primaryColor.withAlpha((0.3 * 255).toInt()),
                             width: 1
                         ),
                         right: BorderSide(
-                            color: ColorRes.blue100,
+                            color: ColorRes.primaryColor.withAlpha((0.3 * 255).toInt()),
                             width: 1
                         )
                     )
@@ -378,14 +472,14 @@ class SaleSummeryTableListValueWidget extends StatelessWidget {
             Expanded(
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 5),
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                     border: Border(
                         bottom: BorderSide(
-                            color: ColorRes.blue100,
+                            color: ColorRes.primaryColor.withAlpha((0.3 * 255).toInt()),
                             width: 1
                         ),
                         right: BorderSide(
-                            color: ColorRes.blue100,
+                            color: ColorRes.primaryColor.withAlpha((0.3 * 255).toInt()),
                             width: 1
                         )
                     )
@@ -409,14 +503,14 @@ class SaleSummeryTableListValueWidget extends StatelessWidget {
             Expanded(
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 5),
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                     border: Border(
                         bottom: BorderSide(
-                            color: ColorRes.blue100,
+                            color: ColorRes.primaryColor.withAlpha((0.3 * 255).toInt()),
                             width: 1
                         ),
                         right: BorderSide(
-                            color: ColorRes.blue100,
+                            color: ColorRes.primaryColor.withAlpha((0.3 * 255).toInt()),
                             width: 1
                         )
                     )
@@ -440,14 +534,14 @@ class SaleSummeryTableListValueWidget extends StatelessWidget {
             Expanded(
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 5),
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                     border: Border(
                         bottom: BorderSide(
-                            color: ColorRes.blue100,
+                            color: ColorRes.primaryColor.withAlpha((0.3 * 255).toInt()),
                             width: 1
                         ),
                         right: BorderSide(
-                            color: ColorRes.blue100,
+                            color: ColorRes.primaryColor.withAlpha((0.3 * 255).toInt()),
                             width: 1
                         )
                     )
@@ -469,59 +563,60 @@ class SaleSummeryTableListValueWidget extends StatelessWidget {
               ),
             ),
 
-            Container(
-              width: 45,
-              padding: const EdgeInsets.symmetric(horizontal: 5),
-              decoration: const BoxDecoration(
-                  border: Border(
-                      bottom: BorderSide(
-                          color: ColorRes.blue100,
-                          width: 1
-                      ),
-                      right: BorderSide(
-                          color: ColorRes.blue100,
-                          width: 1
-                      )
-                  )
-              ),
-              child: Center(
-                child: Align(
-                  alignment: Alignment.center,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      GestureDetector(
-                        onTap: onTap,
-                        child: Container(
-                          width: 40,
-                          padding: const EdgeInsets.symmetric(horizontal: 5),
-                          child: const Center(
-                            child: GlobalImageLoader(
-                              imagePath: Images.eye1,
-                              height: 25,
-                              fit: BoxFit.fitWidth,
-                              color: ColorRes.grey,
+            Expanded(
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 5),
+                decoration: BoxDecoration(
+                    border: Border(
+                        bottom: BorderSide(
+                            color: ColorRes.primaryColor.withAlpha((0.3 * 255).toInt()),
+                            width: 1
+                        ),
+                        right: BorderSide(
+                            color: ColorRes.primaryColor.withAlpha((0.3 * 255).toInt()),
+                            width: 1
+                        )
+                    )
+                ),
+                child: Center(
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        GestureDetector(
+                          onTap: onTap,
+                          child: Container(
+                            width: 40,
+                            padding: const EdgeInsets.symmetric(horizontal: 5),
+                            child: const Center(
+                              child: GlobalImageLoader(
+                                imagePath: Images.eye1,
+                                height: 25,
+                                fit: BoxFit.fitWidth,
+                                color: ColorRes.grey,
+                              ),
                             ),
                           ),
                         ),
-                      ),
 
-                      GestureDetector(
-                        onTap: onTapPrint,
-                        child: Container(
-                          width: 40,
-                          padding: const EdgeInsets.symmetric(horizontal: 5),
-                          child: const Center(
-                            child: GlobalImageLoader(
-                              imagePath: Images.printing,
-                              height: 25,
-                              fit: BoxFit.fitWidth,
-                              color: ColorRes.grey,
+                        GestureDetector(
+                          onTap: onTapPrint,
+                          child: Container(
+                            width: 40,
+                            padding: const EdgeInsets.symmetric(horizontal: 5),
+                            child: const Center(
+                              child: GlobalImageLoader(
+                                imagePath: Images.printing,
+                                height: 25,
+                                fit: BoxFit.fitWidth,
+                                color: ColorRes.grey,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
