@@ -14,7 +14,7 @@ import '../domain/local/preferences/local_storage_keys.dart';
 import '../getit_locator.dart';
 import 'auth/views/signin_screen.dart';
 import 'dashboard/dashboard_screen.dart';
-import 'dashboard/sale_entry_search/views/sale_entry_search.dart';
+import 'dashboard/sale_report/views/sale_entry_search.dart';
 
 class CustomDrawerScreen extends StatefulWidget {
   const CustomDrawerScreen({super.key});

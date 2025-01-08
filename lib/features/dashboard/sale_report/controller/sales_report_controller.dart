@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'package:get/get.dart';
+import '../model/category_model.dart';
 import '../model/payment_mode_model.dart';
 import 'sales_report_repository.dart';
 
@@ -41,6 +42,28 @@ class SalesReportController extends GetxController implements GetxService {
 
       log("Response: ${response.data}");
       log("Response: $selectPaymentModeList");
+
+      _isLoading = false;
+      update();
+    } catch (e, s) {
+      log('Error: ', error: e, stackTrace: s);
+      _isLoading = false;
+      _hasError = true;
+      update();
+    }
+  }
+
+  // =/@ Category Model
+  CategoryModel? categoryModel;
+  Future getCategoryList() async {
+    try {
+      _isLoading = true;
+      _hasError = false;
+      update();
+
+      final response = await repository.getCategoryList();
+
+      categoryModel = response;
 
       _isLoading = false;
       update();

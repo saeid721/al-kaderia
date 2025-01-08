@@ -24,6 +24,15 @@ class _DashboardScreenState extends State<DashboardScreen> {
   String selectProduct = "Select Items";
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    // final reqController = SalesReportController.current;
+    // reqController.getPaymentModeList();
+
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         resizeToAvoidBottomInset: false,
