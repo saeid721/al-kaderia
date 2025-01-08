@@ -8,7 +8,7 @@ import '../../../../../global/constants/images.dart';
 import '../../../../../global/widget/global_image_loader.dart';
 import '../sale_print_screen.dart';
 
-class SaleTableTabBarWidget extends StatelessWidget {
+class SaleSummeryTableTabBarWidget extends StatelessWidget {
   final String firstRow;
   final String secondRow;
   final String thirdRow;
@@ -18,7 +18,7 @@ class SaleTableTabBarWidget extends StatelessWidget {
   final String sevenRow;
   final String eightRow;
 
-  const SaleTableTabBarWidget({
+  const SaleSummeryTableTabBarWidget({
     super.key,
     required this.firstRow,
     required this.secondRow,
@@ -211,7 +211,7 @@ class SaleTableTabBarWidget extends StatelessWidget {
 }
 
 
-class SaleTableListValueWidget extends StatelessWidget {
+class SaleSummeryTableListValueWidget extends StatelessWidget {
   final String firstColumn;
   final String secondColumn;
   final String thirdColumn;
@@ -220,8 +220,10 @@ class SaleTableListValueWidget extends StatelessWidget {
   final String sixColumn;
   final String sevenColumn;
   final String eightColumn;
+  final Function() onTap;
+  final Function() onTapPrint;
 
-  const SaleTableListValueWidget({
+  const SaleSummeryTableListValueWidget({
     super.key,
     required this.firstColumn,
     required this.secondColumn,
@@ -231,6 +233,8 @@ class SaleTableListValueWidget extends StatelessWidget {
     required this.sixColumn,
     required this.sevenColumn,
     required this.eightColumn,
+    required this.onTap,
+    required this.onTapPrint,
   });
 
   @override
@@ -487,26 +491,34 @@ class SaleTableListValueWidget extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       GestureDetector(
-                        onTap: (){
-
-                        },
-                        child: const GlobalImageLoader(
-                          imagePath: Images.eye1,
-                          height: 25,
-                          fit: BoxFit.fitWidth,
-                          color: ColorRes.grey,
+                        onTap: onTap,
+                        child: Container(
+                          width: 40,
+                          padding: const EdgeInsets.symmetric(horizontal: 5),
+                          child: const Center(
+                            child: GlobalImageLoader(
+                              imagePath: Images.eye1,
+                              height: 25,
+                              fit: BoxFit.fitWidth,
+                              color: ColorRes.grey,
+                            ),
+                          ),
                         ),
                       ),
-                      const SizedBox(height: 5,),
+
                       GestureDetector(
-                        onTap: (){
-                          //Get.to(() => SalesPrinterScreen());
-                        },
-                        child: const GlobalImageLoader(
-                          imagePath: Images.printing,
-                          height: 25,
-                          fit: BoxFit.fitWidth,
-                          color: ColorRes.grey,
+                        onTap: onTapPrint,
+                        child: Container(
+                          width: 40,
+                          padding: const EdgeInsets.symmetric(horizontal: 5),
+                          child: const Center(
+                            child: GlobalImageLoader(
+                              imagePath: Images.printing,
+                              height: 25,
+                              fit: BoxFit.fitWidth,
+                              color: ColorRes.grey,
+                            ),
+                          ),
                         ),
                       ),
                     ],
@@ -514,6 +526,8 @@ class SaleTableListValueWidget extends StatelessWidget {
                 ),
               ),
             ),
+
+
 
           ],
         ),

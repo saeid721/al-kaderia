@@ -16,7 +16,8 @@ import '../../../../global/widget/global_text.dart';
 import '../../../base_widget/custom_appbar.dart';
 import '../../../base_widget/global_button.dart';
 import '../controller/sales_report_controller.dart';
-import 'component/table_widget.dart';
+import 'component/sales_summery_table_widget.dart';
+import 'invoice_details_screen.dart';
 
 class SaleEntrySearchScreen extends StatefulWidget {
   const SaleEntrySearchScreen({super.key});
@@ -292,14 +293,15 @@ class _SaleEntrySearchScreenState extends State<SaleEntrySearchScreen> {
                               ),
                               Expanded(
                                 child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
                                       Icon(
                                         Icons.attach_money_outlined,
-                                        size: 30,
+                                        size: 34,
                                         color: ColorRes.grey,
                                       ),
                                       GlobalText(
-                                        str: "20/01/2025",
+                                        str: "350.00",
                                         color: ColorRes.deep300,
                                         fontSize: 16,
                                         fontWeight: FontWeight.w600,
@@ -318,7 +320,7 @@ class _SaleEntrySearchScreenState extends State<SaleEntrySearchScreen> {
                           padding: const EdgeInsets.only(left: 15, right: 15, bottom: 15, top: 5),
                           child: Column(
                             children: [
-                              const SaleTableTabBarWidget(
+                              const SaleSummeryTableTabBarWidget(
                                 firstRow: 'SL',
                                 secondRow: 'Date',
                                 thirdRow: 'Invoice',
@@ -333,7 +335,7 @@ class _SaleEntrySearchScreenState extends State<SaleEntrySearchScreen> {
                                   itemCount: 2,
                                   physics: const NeverScrollableScrollPhysics(),
                                   itemBuilder: (ctx, index){
-                                    return const SaleTableListValueWidget(
+                                    return SaleSummeryTableListValueWidget(
                                       firstColumn: '01',
                                       secondColumn: '07-01-2025',
                                       thirdColumn: '3250107053806',
@@ -342,6 +344,12 @@ class _SaleEntrySearchScreenState extends State<SaleEntrySearchScreen> {
                                       sixColumn: '436',
                                       sevenColumn: '436.00',
                                       eightColumn: '',
+                                      onTap: (){
+                                        Get.to(() => InvoiceDetailsScreen());
+                                      },
+                                      onTapPrint: () {
+
+                                      },
 
                                     );
                                   }
