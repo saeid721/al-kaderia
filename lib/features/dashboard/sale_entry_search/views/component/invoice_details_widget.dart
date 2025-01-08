@@ -202,7 +202,6 @@ class InvoiceDetailsWidget extends StatelessWidget {
   }
 }
 
-
 class InvoiceDetailsValueWidget extends StatelessWidget {
   final String firstColumn;
   final String secondColumn;
@@ -393,8 +392,6 @@ class InvoiceDetailsValueWidget extends StatelessWidget {
   }
 }
 
-
-
 class InvoiceDetailsTotalWidget extends StatelessWidget {
   final String firstColumn;
   final String secondColumn;
@@ -470,7 +467,6 @@ class InvoiceDetailsTotalWidget extends StatelessWidget {
                             color: ColorRes.primaryColor.withAlpha((0.3 * 255).toInt()),
                             width: 1
                         ),
-
                         right: BorderSide(
                             color: ColorRes.primaryColor.withAlpha((0.3 * 255).toInt()),
                             width: 1
@@ -543,7 +539,6 @@ class InvoiceDetailsTotalWidget extends StatelessWidget {
                             color: ColorRes.primaryColor.withAlpha((0.3 * 255).toInt()),
                             width: 1
                         ),
-
                         right: BorderSide(
                             color: ColorRes.primaryColor.withAlpha((0.3 * 255).toInt()),
                             width: 1
@@ -612,7 +607,6 @@ class InvoiceDetailsTotalWidget extends StatelessWidget {
                             color: ColorRes.primaryColor.withAlpha((0.3 * 255).toInt()),
                             width: 1
                         ),
-
                         right: BorderSide(
                             color: ColorRes.primaryColor.withAlpha((0.3 * 255).toInt()),
                             width: 1
@@ -656,7 +650,6 @@ class InvoiceDetailsTotalWidget extends StatelessWidget {
                               width: 1
                           )
                       )
-
                   ),
                   child: const Align(
                     alignment: Alignment.centerRight,
@@ -681,7 +674,6 @@ class InvoiceDetailsTotalWidget extends StatelessWidget {
                             color: ColorRes.primaryColor.withAlpha((0.3 * 255).toInt()),
                             width: 1
                         ),
-
                         right: BorderSide(
                             color: ColorRes.primaryColor.withAlpha((0.3 * 255).toInt()),
                             width: 1
@@ -691,7 +683,6 @@ class InvoiceDetailsTotalWidget extends StatelessWidget {
                             width: 1
                         )
                     )
-
                 ),
                 child: Align(
                   alignment: Alignment.centerRight,
