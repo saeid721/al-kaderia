@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'package:get/get.dart';
 import '../model/category_model.dart';
+import '../model/category_product_model.dart';
 import '../model/payment_mode_model.dart';
 import 'sales_report_repository.dart';
 
@@ -54,7 +55,12 @@ class SalesReportController extends GetxController implements GetxService {
   }
 
   // =/@ Category Model
-  CategoryModel? categoryModel;
+  List<CategoryData>? categoryData;
+  List<String>? selectCategoryDataList;
+
+  String selectCategoryData = "Select One";
+  int selectCategoryDataIndex = -1;
+
   Future getCategoryList() async {
     try {
       _isLoading = true;
@@ -63,7 +69,17 @@ class SalesReportController extends GetxController implements GetxService {
 
       final response = await repository.getCategoryList();
 
-      categoryModel = response;
+      // Initialize the data list
+      categoryData = [];
+      categoryData?.addAll(response.data ?? []);
+
+      selectCategoryDataList = [];
+      categoryData?.map((item){
+        selectCategoryDataList?.add(item.categoryName ?? '');
+      }).toList();
+
+      log("Response: ${response.data}");
+      log("Response: $selectCategoryDataList");
 
       _isLoading = false;
       update();
@@ -75,5 +91,26 @@ class SalesReportController extends GetxController implements GetxService {
     }
   }
 
+  // =/@ Category Product Model
+  CategoryProductModel? categoryProductModel;
+  Future getCategoryProductList() async {
+    try {
+      _isLoading = true;
+      _hasError = false;
+      update();
+
+      final response = await repository.getCategoryProductList();
+
+      categoryProductModel = response;
+
+      _isLoading = false;
+      update();
+    } catch (e, s) {
+      log('Error: ', error: e, stackTrace: s);
+      _isLoading = false;
+      _hasError = true;
+      update();
+    }
+  }
 
 }

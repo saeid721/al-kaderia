@@ -8,10 +8,10 @@ enum AppConfig {
   base,
   baseImage,
   logInUrl,
-  logOutUrl,
   paymentModeUrl,
   categoryModelUrl,
-  categoryProductModel,
+  categoryProductModelUrl,
+  waiterUrl,
 
   // =======================/@ Al-Kaderia Panel @/=====================
 
@@ -52,14 +52,14 @@ extension AppUrlExtention on AppConfig {
     /// ==/@ Auth Api Url @/==
       case AppConfig.logInUrl:
         return '/Api/SalesApi/login';
-      case AppConfig.logOutUrl:
-        return '/Api/SalesApi/logout';
       case AppConfig.paymentModeUrl:
         return '/Api/SalesApi/fund';
       case AppConfig.categoryModelUrl:
         return '/Api/SalesApi/category';
-      case AppConfig.categoryProductModel:
+      case AppConfig.categoryProductModelUrl:
         return '/Api/SalesApi/products/{categoryId}';
+      case AppConfig.waiterUrl:
+        return '/Api/SalesApi/waiter';
 
       default:
     }
