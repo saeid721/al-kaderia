@@ -11,6 +11,7 @@ import '../../../../global/widget/global_text.dart';
 import '../../../../global/widget/global_textform_field.dart';
 import '../../base_widget/custom_appbar.dart';
 import '../../base_widget/global_button.dart';
+import '../sale_report/controller/sales_report_controller.dart';
 
 class CardScreen extends StatefulWidget {
   const CardScreen({super.key});
@@ -33,9 +34,17 @@ class _CardScreenState extends State<CardScreen> {
   String payment = "Select Payment";
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    final reqController = SalesReportController.current;
+    reqController.getWaiterList();
+
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Builder(
-      builder: (context) {
+    return GetBuilder<SalesReportController>(builder: (salesReportController) {
         return Scaffold(
             appBar: const PreferredSize(
                 preferredSize: Size.fromHeight(60),
@@ -120,7 +129,7 @@ class _CardScreenState extends State<CardScreen> {
                         ),
 
                         ListView.builder(
-                          itemCount: 3,
+                          itemCount: 2,
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
                           padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -134,7 +143,7 @@ class _CardScreenState extends State<CardScreen> {
                                   color: ColorRes.white,
                                   boxShadow: [
                                     BoxShadow(
-                                        color: ColorRes.grey.withOpacity(0.3),
+                                        color: ColorRes.grey.withAlpha((0.3 * 255).toInt()),
                                         blurRadius: 5
                                     )
                                   ]
@@ -378,7 +387,7 @@ class _CardScreenState extends State<CardScreen> {
                               color: ColorRes.white,
                               boxShadow: [
                                 BoxShadow(
-                                    color: ColorRes.grey.withOpacity(0.3),
+                                    color: ColorRes.grey.withAlpha((0.3 * 255).toInt()),
                                     blurRadius: 5
                                 )
                               ]
@@ -563,7 +572,7 @@ class _CardScreenState extends State<CardScreen> {
                               color: ColorRes.white,
                               boxShadow: [
                                 BoxShadow(
-                                    color: ColorRes.grey.withOpacity(0.3),
+                                    color: ColorRes.grey.withAlpha((0.3 * 255).toInt()),
                                     blurRadius: 5
                                 )
                               ]

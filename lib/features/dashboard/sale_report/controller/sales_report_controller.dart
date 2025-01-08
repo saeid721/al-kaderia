@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import '../model/category_model.dart';
 import '../model/category_product_model.dart';
 import '../model/payment_mode_model.dart';
+import '../model/waiter_model.dart';
 import 'sales_report_repository.dart';
 
 class SalesReportController extends GetxController implements GetxService {
@@ -112,5 +113,43 @@ class SalesReportController extends GetxController implements GetxService {
       update();
     }
   }
+
+  // =/@ Waiter Model
+  List<WaiterData>? waiterData;
+  List<String>? selectWaiterList;
+
+  String selectWaiterData = "Select One";
+  int selectWaiterDataIndex = -1;
+
+  Future getWaiterList() async {
+    try {
+      _isLoading = true;
+      _hasError = false;
+      update();
+
+      final response = await repository.getWaiterList();
+
+      // Initialize the data list
+      waiterData = [];
+      waiterData?.addAll(response.data ?? []);
+
+      selectWaiterList = [];
+      waiterData?.map((item){
+        selectWaiterList?.add(item.waiterName ?? '');
+      }).toList();
+
+      log("Response: ${response.data}");
+      log("Response: $selectWaiterList");
+
+      _isLoading = false;
+      update();
+    } catch (e, s) {
+      log('Error: ', error: e, stackTrace: s);
+      _isLoading = false;
+      _hasError = true;
+      update();
+    }
+  }
+
 
 }

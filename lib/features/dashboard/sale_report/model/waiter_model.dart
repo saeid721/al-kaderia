@@ -1,7 +1,7 @@
 class WaiterModel {
   int? success;
   String? message;
-  List<Data>? data;
+  List<WaiterData>? data;
 
   WaiterModel({this.success, this.message, this.data});
 
@@ -9,9 +9,9 @@ class WaiterModel {
     success = json['success'];
     message = json['message'];
     if (json['data'] != null) {
-      data = <Data>[];
+      data = <WaiterData>[];
       json['data'].forEach((v) {
-        data!.add(Data.fromJson(v));
+        data!.add(WaiterData.fromJson(v));
       });
     }
   }
@@ -27,7 +27,7 @@ class WaiterModel {
   }
 }
 
-class Data {
+class WaiterData {
   String? waiterId;
   String? waiterName;
   String? waiterDetail;
@@ -38,7 +38,7 @@ class Data {
   String? created;
   String? modified;
 
-  Data(
+  WaiterData(
       {this.waiterId,
         this.waiterName,
         this.waiterDetail,
@@ -49,7 +49,7 @@ class Data {
         this.created,
         this.modified});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  WaiterData.fromJson(Map<String, dynamic> json) {
     waiterId = json['waiter_id'];
     waiterName = json['waiter_name'];
     waiterDetail = json['waiter_detail'];
