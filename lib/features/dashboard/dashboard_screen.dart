@@ -36,6 +36,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     super.initState();
     final reqController = SalesReportController.current;
     reqController.getCategoryList();
+
   }
 
   @override
@@ -79,7 +80,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             ),
                             child: const Center(
                               child: GlobalText(
-                                str: '1',
+                                str: "1",
                                 color: ColorRes.primaryColor,
                                 fontSize: 12,
                                 fontWeight: FontWeight.w700,
@@ -223,12 +224,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                       mainAxisSpacing: 10,
                                       crossAxisSpacing: 10,
                                       crossAxisCount: 3,
-                                      childAspectRatio: (2.6 / 4)
+                                      childAspectRatio: (2.3 / 4)
                                     ),
                                     itemBuilder: (ctx, index){
-                                    final productData = salesReportController.categoryProductModel?.data?[index];
-                                    // productData.amount = double.parse(productData.productRate ?? '0') * (double.tryParse(productData.quantity.toString() ?? '') ?? 0);
-                                    // totalAmount += productData.amount ?? 0;
+
+                                      final productData = salesReportController.categoryProductModel?.data?[index];
+
+                                      double productRate = double.tryParse(productData?.productRate ?? '0') ?? 0.0;
+                                      double quantity = productData?.quantity?.toDouble() ?? 0.0;
+                                      productData?.subTotalAmount = quantity * productRate;
+
                                       return Container(
                                         decoration: BoxDecoration(
                                           borderRadius: BorderRadius.circular(5),
@@ -263,24 +268,18 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                               children: [
                                                 GestureDetector(
                                                   onTap:(){
-                                                    // setState(() {
-                                                    //   if(productData?.quantity ?? > 1){
-                                                    //     productData.quantity = productData.quantity! - 1;
-                                                    //
-                                                    //     // int quantity = int.tryParse(val.trim()) ?? 0;
-                                                    //     int productRate = int.tryParse(productData.productRate ?? '0') ?? 0;
-                                                    //     int amount = productData.quantity! * productRate;
-                                                    //     productData.amountCon?.text = amount.toString();
-                                                    //
-                                                    //     updateGrandAmount(salesReportController);
-                                                    //
-                                                    //     salesReportController.eleTotalAmount = salesReportController.eleGrandTotal;
-                                                    //
-                                                    //     collectCashCon.clear();
-                                                    //     salesReportController.eleChangeAmount = null;
-                                                    //   }
-                                                    // },
-                                                    // );
+                                                    setState(() {
+                                                      if (productData?.quantity! == 1) {
+                                                        productData?.quantity = productData.quantity! - 1;
+
+                                                        // Update subTotalAmount
+                                                        double productRate = double.tryParse(productData?.productRate ?? '0') ?? 0.0;
+                                                        productData?.subTotalAmount = productData.quantity! * productRate;
+
+                                                        // Update totalAmount if needed
+                                                        salesReportController.totalAmount = salesReportController.subTotalAmount;
+                                                      }
+                                                    });
                                                   },
                                                   child: const Icon(
                                                     Icons.remove_circle_outline,
@@ -289,15 +288,26 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                                   ),
                                                 ),
                                                 sizeBoxW(5),
-                                                const GlobalText(
-                                                  str: '0',
+                                                GlobalText(
+                                                  str: productData?.quantity.toString() ?? '',
                                                   color: ColorRes.black,
                                                   fontSize: 13,
                                                   fontWeight: FontWeight.w300,
                                                 ),
                                                 sizeBoxW(5),
                                                 GestureDetector(
-                                                  onTap:(){},
+                                                  onTap:(){
+                                                    setState(() {
+                                                      productData?.quantity = productData.quantity! + 1;
+
+                                                      // Update subTotalAmount
+                                                      double productRate = double.tryParse(productData?.productRate ?? '0') ?? 0.0;
+                                                      productData?.subTotalAmount = productData.quantity! * productRate;
+
+                                                      // Update totalAmount if needed
+                                                      salesReportController.totalAmount = salesReportController.subTotalAmount;
+                                                    });
+                                                  },
                                                   child: const Icon(
                                                     Icons.add_circle_outline,
                                                     color: ColorRes.primaryColor,
@@ -306,7 +316,31 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                                 ),
                                               ],
                                             ),
-                                            sizeBoxH(10)
+                                            sizeBoxW(5),
+                                            GestureDetector(
+                                              onTap:(){
+
+                                              },
+                                              child: Container(
+                                                width: Get.width,
+                                                padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                                                decoration: const BoxDecoration(
+                                                  borderRadius: BorderRadius.only(
+                                                    bottomLeft: Radius.circular(5),
+                                                    bottomRight: Radius.circular(5),
+                                                  ),
+                                                  color: ColorRes.primaryColor,
+                                                ),
+                                                child: const GlobalText(
+                                                  str: 'Add',
+                                                  color: ColorRes.white,
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.w500,
+                                                  fontFamily: 'Rubik',
+                                                  textAlign: TextAlign.center,
+                                                ),
+                                              ),
+                                            ),
                                           ],
                                         ),
                                       );

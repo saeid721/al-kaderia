@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import '../model/category_model.dart';
 import '../model/category_product_model.dart';
 import '../model/payment_mode_model.dart';
-import '../model/serve_type_model.dart';
 import '../model/waiter_model.dart';
 import 'sales_report_repository.dart';
 
@@ -58,14 +57,26 @@ class SalesReportController extends GetxController implements GetxService {
 
 
   double? subTotalAmount;
+  double? grandTotalAmount;
+  String? discountAmount;
+  String? vatAmount;
+  double? payableAmount;
+  double? changeAmount;
   double? totalAmount;
-  String? lessAmount;
+  double? currentPoint;
+  String paymentVai = '0';
   String? paymentVaiName;
 
   Future<void> calculationDataClear() async {
     subTotalAmount = null;
+    grandTotalAmount = null;
+    discountAmount = null;
+    vatAmount = null;
+    payableAmount = null;
+    changeAmount = null;
     totalAmount = null;
-    lessAmount = null;
+    currentPoint = null;
+    paymentVai = '0';
     paymentVaiName = null;
   }
 
@@ -171,7 +182,7 @@ class SalesReportController extends GetxController implements GetxService {
   List<WaiterData>? waiterData;
   List<String>? selectWaiterList;
 
-  String selectWaiterData = "Select One";
+  String selectWaiterData = "Select Waiter";
   int selectWaiterDataIndex = -1;
 
   Future getWaiterList() async {

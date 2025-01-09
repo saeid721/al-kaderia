@@ -49,16 +49,24 @@ class CategoryProductData {
   String? status;
   String? created;
   String? modified;
-  TextEditingController discountAmountCon = TextEditingController();
-  TextEditingController percentCon = TextEditingController();
-  TextEditingController tokenNoCon = TextEditingController();
-  TextEditingController  paidAmountCon = TextEditingController();
-  TextEditingController  noteCon = TextEditingController();
+  int? quantity = 1;
+  TextEditingController? stockQuantityCon = TextEditingController();
+  TextEditingController? discountAmountCon = TextEditingController();
+  TextEditingController? percentCon = TextEditingController();
+  TextEditingController? tokenNoCon = TextEditingController();
+  TextEditingController?  paidAmountCon = TextEditingController();
+  TextEditingController?  noteCon = TextEditingController();
   String selectProduct = "0";
   String selectWaiterData = "0";
-  int? quantity = 1;
-  int? subTotalAmount;
-  double? amount;
+  double? subTotalAmount;
+  double? grandTotalAmount;
+  String? discountAmount;
+  String? vatAmount;
+  double? payableAmount;
+  double? changeAmount;
+  double? totalAmount;
+  double? currentPoint;
+  String? paymentVaiName;
 
   CategoryProductData(
       {this.productId,
@@ -82,7 +90,19 @@ class CategoryProductData {
         this.modified,
         this.quantity,
         this.subTotalAmount,
-        this.amount,
+        this.grandTotalAmount,
+        this.discountAmount,
+        this.vatAmount,
+        this.payableAmount,
+        this.changeAmount,
+        this.totalAmount,
+        this.currentPoint,
+        this.paymentVaiName,
+        this.stockQuantityCon,
+        this.percentCon,
+        this.tokenNoCon,
+        this.paidAmountCon,
+        this.noteCon,
       });
 
   CategoryProductData.fromJson(Map<String, dynamic> json) {

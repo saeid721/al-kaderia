@@ -57,10 +57,7 @@ class _CardScreenState extends State<CardScreen> {
     // TODO: implement initState
     super.initState();
     final reqController = SalesReportController.current;
-    //reqController.getServeTypeList();
-    reqController.getPaymentModeList();
-    reqController.getWaiterList();
-
+    // reqController.getPaymentModeList();
   }
 
   @override
@@ -156,8 +153,11 @@ class _CardScreenState extends State<CardScreen> {
                           padding: const EdgeInsets.symmetric(horizontal: 10),
                           itemBuilder: (context, index){
                             final productData = salesReportController.categoryProductModel?.data?[index];
-                            // productData.amount = double.parse(productData.productRate ?? '0') * (double.tryParse(productData.quantity.toString() ?? '') ?? 0);
-                            // totalAmount += productData.amount ?? 0;
+
+                            double productRate = double.tryParse(productData?.productRate ?? '0') ?? 0.0;
+                            double quantity = productData?.quantity?.toDouble() ?? 0.0;
+                            productData?.subTotalAmount = quantity * productRate;
+
                             return Container(
                               width: Get.width,
                               margin: const EdgeInsets.only(bottom: 10),
@@ -193,32 +193,34 @@ class _CardScreenState extends State<CardScreen> {
                                         child: Row(
                                           mainAxisAlignment: MainAxisAlignment.center,
                                           children: [
+                                            // Decrease Quantity Button
                                             GestureDetector(
-                                                onTap:(){
-                                                  // setState(() {
-                                                  //   if(productData.quantity! > 1){
-                                                  //     productData.quantity = productData.quantity! - 1;
-                                                  //
-                                                  //     int productRate = int.tryParse(productData.productRate ?? '0') ?? 0;
-                                                  //     int amount = productData.quantity! * productRate;
-                                                  //
-                                                  //     salesReportController.totalAmount = salesReportController.subTotalAmount;
-                                                  //
-                                                  //   }
-                                                  // },
-                                                  // );
-                                                },
-                                                child: const Icon(Icons.remove_circle_outline, size: 20, color: ColorRes.primaryColor)),
+                                              onTap: () {
+                                                setState(() {
+                                                  if (productData?.quantity! == 1) {
+                                                    productData?.quantity = productData.quantity! - 1;
+
+                                                    // Update subTotalAmount
+                                                    double productRate = double.tryParse(productData?.productRate ?? '0') ?? 0.0;
+                                                    productData?.subTotalAmount = productData.quantity! * productRate;
+
+                                                    // Update totalAmount if needed
+                                                    salesReportController.totalAmount = salesReportController.subTotalAmount;
+                                                  }
+                                                });
+                                              },
+                                              child: const Icon(Icons.remove_circle_outline, size: 20, color: ColorRes.primaryColor),
+                                            ),
                                             sizeBoxW(3),
                                             Container(
                                               width: 30,
                                               margin: const EdgeInsets.symmetric(vertical: 3),
                                               decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(5),
-                                                  border: Border.all(width: 1, color: ColorRes.primaryColor)
+                                                borderRadius: BorderRadius.circular(5),
+                                                border: Border.all(width: 1, color: ColorRes.primaryColor),
                                               ),
-                                              child: const GlobalText(
-                                                str: "2",
+                                              child: GlobalText(
+                                                str: productData?.quantity.toString() ?? '',
                                                 color: ColorRes.primaryColor,
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w700,
@@ -227,16 +229,29 @@ class _CardScreenState extends State<CardScreen> {
                                               ),
                                             ),
                                             sizeBoxW(3),
+                                            // Increase Quantity Button
                                             GestureDetector(
-                                                onTap:(){},
-                                                child: const Icon(Icons.add_circle_outline, size: 20, color: ColorRes.primaryColor,)),
+                                              onTap: () {
+                                                setState(() {
+                                                  productData?.quantity = productData.quantity! + 1;
+
+                                                  // Update subTotalAmount
+                                                  double productRate = double.tryParse(productData?.productRate ?? '0') ?? 0.0;
+                                                  productData?.subTotalAmount = productData.quantity! * productRate;
+
+                                                  // Update totalAmount if needed
+                                                  salesReportController.totalAmount = salesReportController.subTotalAmount;
+                                                });
+                                              },
+                                              child: const Icon(Icons.add_circle_outline, size: 20, color: ColorRes.primaryColor),
+                                            ),
                                           ],
                                         ),
                                       ),
-                                      const SizedBox(
+                                      SizedBox(
                                         width: 50,
                                         child: GlobalText(
-                                          str: "2500",
+                                          str: productData?.productRate ?? '',
                                           color: ColorRes.deep100,
                                           fontSize: 12,
                                           fontWeight: FontWeight.w700,
@@ -244,10 +259,10 @@ class _CardScreenState extends State<CardScreen> {
                                           fontFamily: 'Rubik',
                                         ),
                                       ),
-                                      const SizedBox(
+                                      SizedBox(
                                         width: 70,
                                         child: GlobalText(
-                                          str: "2500",
+                                          str: productData?.subTotalAmount?.toStringAsFixed(0) ?? '',
                                           color: ColorRes.deep100,
                                           fontSize: 12,
                                           fontWeight: FontWeight.w700,
@@ -257,6 +272,7 @@ class _CardScreenState extends State<CardScreen> {
                                       ),
                                     ],
                                   ),
+
                                   sizeBoxH(10),
                                   CustomPaint(
                                     size: Size(MediaQuery.of(context).size.width, 1),
@@ -283,7 +299,7 @@ class _CardScreenState extends State<CardScreen> {
                                               height: 13,
                                               width: 13,
                                               child: Transform.scale(
-                                                scale: 0.7, // Adjust the scale factor to make the checkbox smaller or larger
+                                                scale: 0.7,
                                                 child: Checkbox(
                                                   value: true,
                                                   onChanged: (val) {
@@ -317,7 +333,7 @@ class _CardScreenState extends State<CardScreen> {
                                               height: 13,
                                               width: 13,
                                               child: Transform.scale(
-                                                scale: 0.7, // Adjust the scale factor to make the checkbox smaller or larger
+                                                scale: 0.7,
                                                 child: Checkbox(
                                                   value: true,
                                                   onChanged: (val) {
@@ -431,10 +447,10 @@ class _CardScreenState extends State<CardScreen> {
                           ),
                           child: Column(
                             children: [
-                              const Row(
+                              Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  GlobalText(
+                                  const GlobalText(
                                     str: "Grand Amount",
                                     color: ColorRes.grey,
                                     fontSize: 13,
@@ -443,7 +459,7 @@ class _CardScreenState extends State<CardScreen> {
                                     fontFamily: 'Rubik',
                                   ),
                                   GlobalText(
-                                    str: "2200",
+                                    str: '2200',
                                     color: ColorRes.grey,
                                     fontSize: 13,
                                     fontWeight: FontWeight.w400,
@@ -656,7 +672,7 @@ class _CardScreenState extends State<CardScreen> {
                                   Expanded(
                                     child: GlobalSmallSearchTextFormField(
                                       text: selectType,
-                                      titleText: "Discount Status",
+                                      titleText: "Type",
                                       vertical: 10,
                                       color: ColorRes.black,
                                       item: selectServeTypeList,
@@ -729,9 +745,9 @@ class _CardScreenState extends State<CardScreen> {
                                     salesReportController.selectWaiterData = salesReportController.selectWaiterList![val];
 
                                     final waiterType = salesReportController
-                                        .categoryData?[salesReportController.selectWaiterList!.indexOf(
+                                        .waiterData?[salesReportController.selectWaiterList!.indexOf(
                                         salesReportController.selectWaiterData)]
-                                        .categoryId
+                                        .waiterId
                                         ?.toString();
 
                                     log('Drop Main Id: $waiterType');
