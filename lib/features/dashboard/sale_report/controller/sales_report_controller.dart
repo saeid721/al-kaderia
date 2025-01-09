@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import '../model/category_model.dart';
 import '../model/category_product_model.dart';
 import '../model/payment_mode_model.dart';
+import '../model/serve_type_model.dart';
 import '../model/waiter_model.dart';
 import 'sales_report_repository.dart';
 
@@ -17,43 +18,6 @@ class SalesReportController extends GetxController implements GetxService {
   bool _hasError = false;
 
   bool get hasError => _hasError;
-
-  // =/@ Payment Mode
-  List<PaymentModeData>? paymentModeData;
-  List<String>? selectPaymentModeList;
-
-  String selectPaymentMode = "Select One";
-  int selectPaymentModeIndex = -1;
-
-  Future getPaymentModeList() async {
-    try {
-      _isLoading = true;
-      _hasError = false;
-      update();
-
-      final response = await repository.getPaymentModeList();
-
-      // Initialize the data list
-      paymentModeData = [];
-      paymentModeData?.addAll(response.data ?? []);
-
-      selectPaymentModeList = [];
-      paymentModeData?.map((item){
-        selectPaymentModeList?.add(item.fundName ?? '');
-      }).toList();
-
-      log("Response: ${response.data}");
-      log("Response: $selectPaymentModeList");
-
-      _isLoading = false;
-      update();
-    } catch (e, s) {
-      log('Error: ', error: e, stackTrace: s);
-      _isLoading = false;
-      _hasError = true;
-      update();
-    }
-  }
 
   // =/@ Category Model
   List<CategoryData>? categoryData;
@@ -92,15 +56,30 @@ class SalesReportController extends GetxController implements GetxService {
     }
   }
 
+
+  double? subTotalAmount;
+  double? totalAmount;
+  String? lessAmount;
+  String? paymentVaiName;
+
+  Future<void> calculationDataClear() async {
+    subTotalAmount = null;
+    totalAmount = null;
+    lessAmount = null;
+    paymentVaiName = null;
+  }
+
+  List<CategoryProductData> selectedProducts = [];
+
   // =/@ Category Product Model
   CategoryProductModel? categoryProductModel;
-  Future getCategoryProductList() async {
+  Future getCategoryProductList({required String categoryId}) async {
     try {
       _isLoading = true;
       _hasError = false;
       update();
 
-      final response = await repository.getCategoryProductList();
+      final response = await repository.getCategoryProductList(categoryId: categoryId);
 
       categoryProductModel = response;
 
@@ -113,6 +92,80 @@ class SalesReportController extends GetxController implements GetxService {
       update();
     }
   }
+
+
+  // =/@ Payment Mode
+  List<PaymentModeData>? paymentModeData;
+  List<String>? selectPaymentModeList;
+
+  String selectPaymentMode = "Select One";
+  int selectPaymentModeIndex = -1;
+
+  Future getPaymentModeList() async {
+    try {
+      _isLoading = true;
+      _hasError = false;
+      update();
+
+      final response = await repository.getPaymentModeList();
+
+      // Initialize the data list
+      paymentModeData = [];
+      paymentModeData?.addAll(response.data ?? []);
+
+      selectPaymentModeList = [];
+      paymentModeData?.map((item){
+        selectPaymentModeList?.add(item.fundName ?? '');
+      }).toList();
+
+      log("Response: ${response.data}");
+      log("Response: $selectPaymentModeList");
+
+      _isLoading = false;
+      update();
+    } catch (e, s) {
+      log('Error: ', error: e, stackTrace: s);
+      _isLoading = false;
+      _hasError = true;
+      update();
+    }
+  }
+
+  // =/@ Serve Type Model
+  // List<ServeTypeData>? serveTypeData;
+  // List<String>? selectServeTypeList;
+  //
+  // String selectServeTypeData = "Select One";
+  // int selectServeTypeDataIndex = -1;
+  //
+  // Future getServeTypeList() async {
+  //   try {
+  //     _isLoading = true;
+  //     _hasError = false;
+  //     update();
+  //
+  //     final response = await repository.getServeTypeList();
+  //
+  //     // ServeTypeData = [];
+  //     // ServeTypeData?.addAll(response.data ?? []);
+  //     //
+  //     // selectServeTypeList = [];
+  //     // ServeTypeData?.map((item){
+  //     //   selectServeTypeList?.add(item.waiterName ?? '');
+  //     // }).toList();
+  //     //
+  //     // log("Response: ${response.data}");
+  //     // log("Response: $selectServeTypeList");
+  //
+  //     _isLoading = false;
+  //     update();
+  //   } catch (e, s) {
+  //     log('Error: ', error: e, stackTrace: s);
+  //     _isLoading = false;
+  //     _hasError = true;
+  //     update();
+  //   }
+  // }
 
   // =/@ Waiter Model
   List<WaiterData>? waiterData;

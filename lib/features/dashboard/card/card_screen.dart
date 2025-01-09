@@ -10,6 +10,7 @@ import '../../../../global/widget/global_container.dart';
 import '../../../../global/widget/global_search_text_formfield.dart';
 import '../../../../global/widget/global_text.dart';
 import '../../../../global/widget/global_textform_field.dart';
+import '../../../global/widget/global_drop_down_formfield.dart';
 import '../../base_widget/custom_appbar.dart';
 import '../../base_widget/global_button.dart';
 import '../sale_report/controller/sales_report_controller.dart';
@@ -24,11 +25,27 @@ class CardScreen extends StatefulWidget {
 class _CardScreenState extends State<CardScreen> {
 
   final GlobalKey<ScaffoldState> drawerKey = GlobalKey<ScaffoldState>();
+
   TextEditingController discountAmountCon = TextEditingController();
   TextEditingController percentCon = TextEditingController();
   TextEditingController tokenNoCon = TextEditingController();
   TextEditingController  paidAmountCon = TextEditingController();
   TextEditingController  noteCon = TextEditingController();
+
+  String selectPaymentMode = "0";
+  List<String> selectServeTypeList = [
+    "Take Away",
+    "Home Delivery",
+    "Pathao",
+    "FoodPanda",
+    "HungryNaki",
+    "Foodie",
+    "PandaGo",
+    "Guest Complimentory",
+    "Staff Complimentory",
+    "Cafe",
+    "Express",
+  ];
 
   String selectProduct = "Select Addons";
   String payment = "Select Payment";
@@ -40,6 +57,8 @@ class _CardScreenState extends State<CardScreen> {
     // TODO: implement initState
     super.initState();
     final reqController = SalesReportController.current;
+    //reqController.getServeTypeList();
+    reqController.getPaymentModeList();
     reqController.getWaiterList();
 
   }
@@ -131,11 +150,14 @@ class _CardScreenState extends State<CardScreen> {
                         ),
 
                         ListView.builder(
-                          itemCount: 2,
+                          itemCount: salesReportController.categoryProductModel?.data?.length ?? 0,
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
                           padding: const EdgeInsets.symmetric(horizontal: 10),
                           itemBuilder: (context, index){
+                            final productData = salesReportController.categoryProductModel?.data?[index];
+                            // productData.amount = double.parse(productData.productRate ?? '0') * (double.tryParse(productData.quantity.toString() ?? '') ?? 0);
+                            // totalAmount += productData.amount ?? 0;
                             return Container(
                               width: Get.width,
                               margin: const EdgeInsets.only(bottom: 10),
@@ -155,10 +177,10 @@ class _CardScreenState extends State<CardScreen> {
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
-                                      const Expanded(
+                                      Expanded(
                                         child: SizedBox(
                                           child: GlobalText(
-                                            str: 'Beef & Bacon Burger',
+                                            str: productData?.productName ?? '',
                                             color: ColorRes.black,
                                             fontSize: 12,
                                             fontWeight: FontWeight.w500,
@@ -172,7 +194,20 @@ class _CardScreenState extends State<CardScreen> {
                                           mainAxisAlignment: MainAxisAlignment.center,
                                           children: [
                                             GestureDetector(
-                                                onTap:(){},
+                                                onTap:(){
+                                                  // setState(() {
+                                                  //   if(productData.quantity! > 1){
+                                                  //     productData.quantity = productData.quantity! - 1;
+                                                  //
+                                                  //     int productRate = int.tryParse(productData.productRate ?? '0') ?? 0;
+                                                  //     int amount = productData.quantity! * productRate;
+                                                  //
+                                                  //     salesReportController.totalAmount = salesReportController.subTotalAmount;
+                                                  //
+                                                  //   }
+                                                  // },
+                                                  // );
+                                                },
                                                 child: const Icon(Icons.remove_circle_outline, size: 20, color: ColorRes.primaryColor)),
                                             sizeBoxW(3),
                                             Container(
@@ -621,11 +656,17 @@ class _CardScreenState extends State<CardScreen> {
                                   Expanded(
                                     child: GlobalSmallSearchTextFormField(
                                       text: selectType,
-                                      titleText: "Type",
+                                      titleText: "Discount Status",
                                       vertical: 10,
                                       color: ColorRes.black,
-                                      item: const [],
-                                      onSelect: (val) async{},
+                                      item: selectServeTypeList,
+                                      onSelect: (val) async {
+                                        setState(() {
+                                          selectType = selectServeTypeList[val];
+                                          log("Value: $selectType");
+                                        });
+                                        Get.back();
+                                      },
                                     ),
                                   ),
 
@@ -636,13 +677,31 @@ class _CardScreenState extends State<CardScreen> {
                               Row(
                                 children: [
                                   Expanded(
-                                    child: GlobalSmallSearchTextFormField(
-                                      text: payment,
-                                      titleText: "Payment",
-                                      vertical: 10,
-                                      color: ColorRes.black,
-                                      item: const [],
-                                      onSelect: (val) async{},
+                                    child: GlobalSearchTextFormField(
+                                      titleText: 'Payment Mode',
+                                      text: salesReportController.selectPaymentMode,
+                                      color: salesReportController.selectPaymentModeIndex > -1 ? ColorRes.black : ColorRes.grey,
+                                      item: salesReportController.selectPaymentModeList ?? [],
+                                      onSelect: (val) async {
+                                        setState(() {
+                                          Get.back();
+
+                                          salesReportController.selectPaymentModeIndex = val;
+
+                                          salesReportController.selectPaymentMode = salesReportController.selectPaymentModeList![val];
+
+                                          final paymentType = salesReportController.paymentModeData?[salesReportController.selectPaymentModeList!.indexOf(salesReportController.selectPaymentMode)].fundId?.toString();
+
+                                          log('Drop Main Id: $paymentType');
+
+                                          if (paymentType != null) {
+                                            selectPaymentMode = paymentType;
+                                            salesReportController.getPaymentModeList();
+                                          } else {
+                                            log('Drop Id: $selectPaymentMode');
+                                          }
+                                        });
+                                      },
                                     ),
                                   ),
                                   sizeBoxW(5),

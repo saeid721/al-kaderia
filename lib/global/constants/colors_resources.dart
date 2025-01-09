@@ -11,104 +11,11 @@ class ColorRes {
   static const Color electronicsShopColor = Colors.teal;
   static const Color resturantShopColor = Color(0xFFB60000);
 
-
-  // static const Color superShopColor = Color(0xFF0173BD);
-  // static const Color pharmacyShopColor = Color(0xFFBC2C3D);
-  // static const Color electronicsShopColor = Color(0xFF180f68);
-  // static const Color resturantShopColor = Color(0xFFB60000);
-  // static const Color electronicsShopColor = Color(0xFF00A65A);
-
-  // static ThemeController themeFind = Get.find<ThemeController>();
-
-  // static Color getDarkLightColor(context) {
-  //   final theme = Theme.of(context).brightness;
-  //   return (theme == Brightness.dark) ? dark : colorWhite;
-  // }
-  //
-  // static Color getDarkLightGaroColor(context) {
-  //   final theme = Theme.of(context).brightness;
-  //   return (theme == Brightness.dark) ? darkGaro : backgroundColor;
-  // }
-  //
-  // static Color getDarkLightGreyColor(context) {
-  //   final theme = Theme.of(context).brightness;
-  //   return (theme == Brightness.dark) ? dark : backgroundColor;
-  // }
-  //
-  // static Color getDarkWhiteGaroColor(context) {
-  //   final theme = Theme.of(context).brightness;
-  //   return (theme == Brightness.dark) ? darkGaro : colorWhite;
-  // }
-  //
-  // static Color getMessageFieldColor(context) {
-  //   final theme = Theme.of(context).brightness;
-  //   return (theme == Brightness.dark)
-  //       ? black.withOpacity(0.2)
-  //       : grey.withOpacity(0.1);
-  // }
-  //
-  // static Color getWhiteBlackColor(context) {
-  //   final theme = Theme.of(context).brightness;
-  //   return (theme == Brightness.dark) ? colorWhite : colorBlack;
-  // }
-  //
-  // static Color getBlackWhiteColor(context) {
-  //   final theme = Theme.of(context).brightness;
-  //   return (theme == Brightness.dark) ? black : white;
-  // }
-  //
-  // static Color getRedGreyColor(context) {
-  //   final theme = Theme.of(context).brightness;
-  //   return (theme == Brightness.dark) ? colorRed : colorGrey;
-  // }
-  //
-  // static Color getGreyRedColor(context) {
-  //   final theme = Theme.of(context).brightness;
-  //   return (theme == Brightness.dark) ? colorGrey : colorRed;
-  // }
-  //
-  // static Color getGreyBlackColor(context) {
-  //   final theme = Theme.of(context).brightness;
-  //   return (theme == Brightness.dark) ? colorGrey : colorBlack;
-  // }
-  //
-  // static Color getRedBlackColor(context) {
-  //   final theme = Theme.of(context).brightness;
-  //   return (theme == Brightness.dark) ? colorRed : colorBlack;
-  // }
-  //
-  // static Color getGreyBlackOpacityColor(context) {
-  //   final theme = Theme.of(context).brightness;
-  //   return (theme == Brightness.dark)
-  //       ? darkGaro
-  //       : ColorRes.colorGrey.withOpacity(0.1);
-  // }
-  //
-  // /// ==@ Box Shadow Color @==
-  // static Color getBlackGreyBoxShadowColor(context) {
-  //   final theme = Theme.of(context).brightness;
-  //   return (theme == Brightness.dark)
-  //       ? Colors.black.withOpacity(0.2)
-  //       : Colors.grey.withOpacity(0.2);
-  // }
-  //
-  // static Color getBlueColor(context) {
-  //   final theme = Theme.of(context).brightness;
-  //   return (theme == theme) ? colorBlue : colorBlue;
-  // }
-  //
-  // static Color getBorderColor(context) {
-  //   final theme = Theme.of(context).brightness;
-  //   return (theme == theme) ? borderColor : borderColor;
-  // }
-  //
-  // static Color getDollarColor(context) {
-  //   final theme = Theme.of(context).brightness;
-  //   return (theme == theme) ? colorDollar : colorDollar;
-  // }
-
   static const Color dark = Color(0xff252525);
   static const Color darkGaro = Color(0xff2d2d2d);
+
+  static const Color borderColor = Color(0xFFD1CECE);
+  static const Color dropDownItem = Color(0xFFD1CECE);
 
 
   /// ==@ All Color Res @==
@@ -167,6 +74,7 @@ class ColorRes {
   static const Color white150 = Color(0xFFF5F5F5);
   static const Color white200 = Color(0xFFBDBDBD);
 
+  static const Color deep10 = Color(0xFFA2A2A2);
   static const Color deep100 = Color(0xFF7A7A7A);
   static const Color deep200 = Color(0xFF797471);
   static const Color deep250 = Color(0xFF7C7C7C);

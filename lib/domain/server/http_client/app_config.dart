@@ -11,6 +11,7 @@ enum AppConfig {
   paymentModeUrl,
   categoryModelUrl,
   categoryProductModelUrl,
+  serveTypeUrl,
   waiterUrl,
 
   // =======================/@ Al-Kaderia Panel @/=====================
@@ -57,7 +58,9 @@ extension AppUrlExtention on AppConfig {
       case AppConfig.categoryModelUrl:
         return '/Api/SalesApi/category';
       case AppConfig.categoryProductModelUrl:
-        return '/Api/SalesApi/products/{categoryId}';
+        return '/Api/SalesApi/products';
+      case AppConfig.serveTypeUrl:
+        return '/Api/SalesApi/types';
       case AppConfig.waiterUrl:
         return '/Api/SalesApi/waiter';
 

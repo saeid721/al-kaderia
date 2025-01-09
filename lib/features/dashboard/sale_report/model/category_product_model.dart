@@ -1,7 +1,9 @@
+import 'package:flutter/material.dart';
+
 class CategoryProductModel {
   int? success;
   String? message;
-  List<Data>? data;
+  List<CategoryProductData>? data;
 
   CategoryProductModel({this.success, this.message, this.data});
 
@@ -9,9 +11,9 @@ class CategoryProductModel {
     success = json['success'];
     message = json['message'];
     if (json['data'] != null) {
-      data = <Data>[];
+      data = <CategoryProductData>[];
       json['data'].forEach((v) {
-        data!.add(Data.fromJson(v));
+        data!.add(CategoryProductData.fromJson(v));
       });
     }
   }
@@ -27,7 +29,7 @@ class CategoryProductModel {
   }
 }
 
-class Data {
+class CategoryProductData {
   String? productId;
   String? productSerialNumber;
   String? productName;
@@ -47,8 +49,18 @@ class Data {
   String? status;
   String? created;
   String? modified;
+  TextEditingController discountAmountCon = TextEditingController();
+  TextEditingController percentCon = TextEditingController();
+  TextEditingController tokenNoCon = TextEditingController();
+  TextEditingController  paidAmountCon = TextEditingController();
+  TextEditingController  noteCon = TextEditingController();
+  String selectProduct = "0";
+  String selectWaiterData = "0";
+  int? quantity = 1;
+  int? subTotalAmount;
+  double? amount;
 
-  Data(
+  CategoryProductData(
       {this.productId,
         this.productSerialNumber,
         this.productName,
@@ -67,9 +79,13 @@ class Data {
         this.modifiedBy,
         this.status,
         this.created,
-        this.modified});
+        this.modified,
+        this.quantity,
+        this.subTotalAmount,
+        this.amount,
+      });
 
-  Data.fromJson(Map<String, dynamic> json) {
+  CategoryProductData.fromJson(Map<String, dynamic> json) {
     productId = json['product_id'];
     productSerialNumber = json['product_serial_number'];
     productName = json['product_name'];

@@ -32,6 +32,56 @@ InputDecoration inputDecoration = InputDecoration(
 
 );
 
+InputDecoration inputDropDecoration = InputDecoration(
+  filled: true,
+  fillColor: ColorRes.white,
+  isDense: true,
+  contentPadding: const EdgeInsets.symmetric( horizontal: 10.0, vertical: 10),
+  border: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(5),
+      borderSide: const BorderSide(
+          width: 1,
+          color: ColorRes.borderColor
+      )
+  ),
+  errorBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(5),
+      borderSide: const BorderSide(
+          width: 1,
+          color: ColorRes.borderColor
+      )
+  ),
+  focusedErrorBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(5),
+      borderSide: const BorderSide(
+          width: 1,
+          color: ColorRes.borderColor
+      )
+  ),
+  focusedBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(5),
+      borderSide: const BorderSide(
+          width: 1,
+          color: ColorRes.borderColor
+      )
+  ),
+  enabledBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(5),
+      borderSide: const BorderSide(
+          width: 1,
+          color: ColorRes.borderColor
+      )
+  ),
+  disabledBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(5),
+      borderSide: const BorderSide(
+          width: 1,
+          color: ColorRes.borderColor
+      )
+  ),
+
+);
+
 InputDecoration nonInputField = const InputDecoration(
 
   border: InputBorder.none,

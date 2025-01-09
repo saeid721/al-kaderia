@@ -14,7 +14,8 @@ import 'card/card_screen.dart';
 import 'sale_report/controller/sales_report_controller.dart';
 
 class DashboardScreen extends StatefulWidget {
-  const DashboardScreen({super.key});
+  const DashboardScreen({
+    super.key});
 
   @override
   State<DashboardScreen> createState() => _DashboardScreenState();
@@ -35,8 +36,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
     super.initState();
     final reqController = SalesReportController.current;
     reqController.getCategoryList();
-    reqController.getCategoryProductList();
-
   }
 
   @override
@@ -172,7 +171,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
                                 if (categoryType != null) {
                                   selectCategoryData = categoryType;
-                                  salesReportController.getCategoryList();
+                                  salesReportController.getCategoryProductList(categoryId: selectCategoryData);
                                 } else {
                                   log('Drop Id: $selectCategoryData');
                                 }
@@ -224,10 +223,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                       mainAxisSpacing: 10,
                                       crossAxisSpacing: 10,
                                       crossAxisCount: 3,
-                                      childAspectRatio: (3.2 / 4)
+                                      childAspectRatio: (2.6 / 4)
                                     ),
                                     itemBuilder: (ctx, index){
                                     final productData = salesReportController.categoryProductModel?.data?[index];
+                                    // productData.amount = double.parse(productData.productRate ?? '0') * (double.tryParse(productData.quantity.toString() ?? '') ?? 0);
+                                    // totalAmount += productData.amount ?? 0;
                                       return Container(
                                         decoration: BoxDecoration(
                                           borderRadius: BorderRadius.circular(5),
@@ -252,15 +253,35 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                             GlobalText(
                                               str: productData?.productName ?? '',
                                               fontSize: 13,
-                                              fontWeight: FontWeight.w700,
+                                              fontWeight: FontWeight.w500,
                                               color: ColorRes.black,
+                                              maxLines: 3,
                                             ),
                                             Expanded(child: Container()),
                                             Row(
                                               mainAxisAlignment: MainAxisAlignment.center,
                                               children: [
                                                 GestureDetector(
-                                                  onTap:(){},
+                                                  onTap:(){
+                                                    // setState(() {
+                                                    //   if(productData?.quantity ?? > 1){
+                                                    //     productData.quantity = productData.quantity! - 1;
+                                                    //
+                                                    //     // int quantity = int.tryParse(val.trim()) ?? 0;
+                                                    //     int productRate = int.tryParse(productData.productRate ?? '0') ?? 0;
+                                                    //     int amount = productData.quantity! * productRate;
+                                                    //     productData.amountCon?.text = amount.toString();
+                                                    //
+                                                    //     updateGrandAmount(salesReportController);
+                                                    //
+                                                    //     salesReportController.eleTotalAmount = salesReportController.eleGrandTotal;
+                                                    //
+                                                    //     collectCashCon.clear();
+                                                    //     salesReportController.eleChangeAmount = null;
+                                                    //   }
+                                                    // },
+                                                    // );
+                                                  },
                                                   child: const Icon(
                                                     Icons.remove_circle_outline,
                                                     color: ColorRes.primaryColor,
