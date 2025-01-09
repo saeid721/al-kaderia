@@ -1,4 +1,3 @@
-
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,7 +9,6 @@ import '../../../../global/widget/global_container.dart';
 import '../../../../global/widget/global_search_text_formfield.dart';
 import '../../../../global/widget/global_text.dart';
 import '../../../../global/widget/global_textform_field.dart';
-import '../../../global/widget/global_drop_down_formfield.dart';
 import '../../base_widget/custom_appbar.dart';
 import '../../base_widget/global_button.dart';
 import '../sale_report/controller/sales_report_controller.dart';
@@ -29,8 +27,8 @@ class _CardScreenState extends State<CardScreen> {
   TextEditingController discountAmountCon = TextEditingController();
   TextEditingController percentCon = TextEditingController();
   TextEditingController tokenNoCon = TextEditingController();
-  TextEditingController  paidAmountCon = TextEditingController();
-  TextEditingController  noteCon = TextEditingController();
+  TextEditingController paidAmountCon = TextEditingController();
+  TextEditingController noteCon = TextEditingController();
 
   String selectPaymentMode = "0";
   List<String> selectServeTypeList = [
@@ -447,11 +445,11 @@ class _CardScreenState extends State<CardScreen> {
                           ),
                           child: Column(
                             children: [
-                              Row(
+                              const Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  const GlobalText(
-                                    str: "Grand Amount",
+                                  GlobalText(
+                                    str: "Grand Amount ",
                                     color: ColorRes.grey,
                                     fontSize: 13,
                                     fontWeight: FontWeight.w400,
@@ -497,7 +495,7 @@ class _CardScreenState extends State<CardScreen> {
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   GlobalText(
-                                    str: "Vat Amount(5%)",
+                                    str: "Vat Amount(5%) ",
                                     color: ColorRes.grey,
                                     fontSize: 13,
                                     fontWeight: FontWeight.w400,
