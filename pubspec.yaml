@@ -29,7 +29,7 @@ dependencies:
   permission_handler: ^11.3.1
   circular_badge_avatar: ^0.1.5
   flutter_image_compress: ^2.4.0
-#  flutter_barcode_scanner: ^2.0.0
+  #  flutter_barcode_scanner: ^2.0.0
   print_bluetooth_thermal: ^1.1.4
 
 dev_dependencies:

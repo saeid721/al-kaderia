@@ -78,9 +78,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
                               borderRadius: BorderRadius.circular(50),
                               color: ColorRes.white
                             ),
-                            child: const Center(
+                            child: Center(
                               child: GlobalText(
-                                str: "1",
+                                str: salesReportController.cartCount.toString(),
                                 color: ColorRes.primaryColor,
                                 fontSize: 12,
                                 fontWeight: FontWeight.w700,
@@ -115,35 +115,35 @@ class _DashboardScreenState extends State<DashboardScreen> {
               color: Colors.white,
               child: Column(
                 children: [
-                  Container(
-                    width: size(context).width,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      color: ColorRes.primaryColor
-                    ),
-                    margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                    padding: const EdgeInsets.symmetric(vertical: 20),
-                    child: const Column(
-                      children: [
-                        GlobalText(
-                          str: 'Charge',
-                          color: ColorRes.white,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                          textAlign: TextAlign.center,
-                          fontFamily: 'Rubik',
-                        ),
-                        GlobalText(
-                          str: 'TK \$2000',
-                          color: ColorRes.white,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                          textAlign: TextAlign.center,
-                          fontFamily: 'Rubik',
-                        ),
-                      ],
-                    ),
-                  ),
+                  // Container(
+                  //   width: size(context).width,
+                  //   decoration: BoxDecoration(
+                  //     borderRadius: BorderRadius.circular(5),
+                  //     color: ColorRes.primaryColor
+                  //   ),
+                  //   margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                  //   padding: const EdgeInsets.symmetric(vertical: 20),
+                  //   child: const Column(
+                  //     children: [
+                  //       GlobalText(
+                  //         str: 'Charge',
+                  //         color: ColorRes.white,
+                  //         fontSize: 14,
+                  //         fontWeight: FontWeight.w500,
+                  //         textAlign: TextAlign.center,
+                  //         fontFamily: 'Rubik',
+                  //       ),
+                  //       GlobalText(
+                  //         str: 'TK \$2000',
+                  //         color: ColorRes.white,
+                  //         fontSize: 14,
+                  //         fontWeight: FontWeight.w400,
+                  //         textAlign: TextAlign.center,
+                  //         fontFamily: 'Rubik',
+                  //       ),
+                  //     ],
+                  //   ),
+                  // ),
 
                   sizeBoxH(12),
                   Padding(
@@ -224,7 +224,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                       mainAxisSpacing: 10,
                                       crossAxisSpacing: 10,
                                       crossAxisCount: 3,
-                                      childAspectRatio: (2.3 / 4)
+                                      childAspectRatio: (3.2 / 4)
                                     ),
                                     itemBuilder: (ctx, index){
 
@@ -234,114 +234,147 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                       double quantity = productData?.quantity?.toDouble() ?? 0.0;
                                       productData?.subTotalAmount = quantity * productRate;
 
-                                      return Container(
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(5),
-                                          border: Border.all(
-                                            width: 1,
-                                            color: ColorRes.grey.withAlpha((0.30 * 255).toInt()),
+                                      return GestureDetector(
+                                        onTap: () {
+                                          setState(() {
+                                            // Increment product quantity
+                                            productData?.quantity = productData.quantity! + 1;
+
+                                            // Update subTotalAmount
+                                            double productRate = double.tryParse(productData?.productRate ?? '0') ?? 0.0;
+                                            productData?.subTotalAmount = productData.quantity! * productRate;
+
+                                            // Update totalAmount if needed
+                                            salesReportController.totalAmount = salesReportController.subTotalAmount;
+                                          });
+
+                                          // Increment cart count
+                                          salesReportController.incrementCartCount();
+                                        },
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(5),
+                                            border: Border.all(
+                                              width: 1,
+                                              color: ColorRes.grey.withAlpha((0.30 * 255).toInt()),
+                                            ),
                                           ),
-                                        ),
-                                        child: Column(
-                                          children: [
-                                            const ClipRRect(
-                                              borderRadius: BorderRadius.only(
-                                                topRight: Radius.circular(5),
-                                                topLeft: Radius.circular(5)
-                                              ),
-                                              child: GlobalImageLoader(
-                                                imagePath: Images.burger,
-                                                fit: BoxFit.cover,
-                                              ),
-                                            ),
-                                            sizeBoxH(5),
-                                            GlobalText(
-                                              str: productData?.productName ?? '',
-                                              fontSize: 13,
-                                              fontWeight: FontWeight.w500,
-                                              color: ColorRes.black,
-                                              maxLines: 3,
-                                            ),
-                                            Expanded(child: Container()),
-                                            Row(
-                                              mainAxisAlignment: MainAxisAlignment.center,
-                                              children: [
-                                                GestureDetector(
-                                                  onTap:(){
-                                                    setState(() {
-                                                      if (productData?.quantity! == 1) {
-                                                        productData?.quantity = productData.quantity! - 1;
-
-                                                        // Update subTotalAmount
-                                                        double productRate = double.tryParse(productData?.productRate ?? '0') ?? 0.0;
-                                                        productData?.subTotalAmount = productData.quantity! * productRate;
-
-                                                        // Update totalAmount if needed
-                                                        salesReportController.totalAmount = salesReportController.subTotalAmount;
-                                                      }
-                                                    });
-                                                  },
-                                                  child: const Icon(
-                                                    Icons.remove_circle_outline,
-                                                    color: ColorRes.primaryColor,
-                                                    size: 18
-                                                  ),
+                                          child: Column(
+                                            children: [
+                                              const ClipRRect(
+                                                borderRadius: BorderRadius.only(
+                                                  topRight: Radius.circular(5),
+                                                  topLeft: Radius.circular(5)
                                                 ),
-                                                sizeBoxW(5),
-                                                GlobalText(
-                                                  str: productData?.quantity.toString() ?? '',
-                                                  color: ColorRes.black,
-                                                  fontSize: 13,
-                                                  fontWeight: FontWeight.w300,
-                                                ),
-                                                sizeBoxW(5),
-                                                GestureDetector(
-                                                  onTap:(){
-                                                    setState(() {
-                                                      productData?.quantity = productData.quantity! + 1;
-
-                                                      // Update subTotalAmount
-                                                      double productRate = double.tryParse(productData?.productRate ?? '0') ?? 0.0;
-                                                      productData?.subTotalAmount = productData.quantity! * productRate;
-
-                                                      // Update totalAmount if needed
-                                                      salesReportController.totalAmount = salesReportController.subTotalAmount;
-                                                    });
-                                                  },
-                                                  child: const Icon(
-                                                    Icons.add_circle_outline,
-                                                    color: ColorRes.primaryColor,
-                                                    size: 18
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                            sizeBoxW(5),
-                                            GestureDetector(
-                                              onTap:(){
-
-                                              },
-                                              child: Container(
-                                                width: Get.width,
-                                                padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-                                                decoration: const BoxDecoration(
-                                                  borderRadius: BorderRadius.only(
-                                                    bottomLeft: Radius.circular(5),
-                                                    bottomRight: Radius.circular(5),
-                                                  ),
-                                                  color: ColorRes.primaryColor,
-                                                ),
-                                                child: const GlobalText(
-                                                  str: 'Add',
-                                                  color: ColorRes.white,
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.w500,
-                                                  fontFamily: 'Rubik',
-                                                  textAlign: TextAlign.center,
+                                                child: GlobalImageLoader(
+                                                  imagePath: Images.burger,
+                                                  fit: BoxFit.cover,
                                                 ),
                                               ),
-                                            ),
-                                          ],
+                                              sizeBoxH(5),
+                                              GlobalText(
+                                                str: productData?.productName ?? '',
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w500,
+                                                color: ColorRes.black,
+                                                textAlign: TextAlign.center,
+                                                maxLines: 3,
+                                              ),
+                                              Expanded(child: Container()),
+                                              // Row(
+                                              //   mainAxisAlignment: MainAxisAlignment.center,
+                                              //   children: [
+                                              //     GestureDetector(
+                                              //       onTap:(){
+                                              //         setState(() {
+                                              //           if (productData?.quantity! == 1) {
+                                              //             productData?.quantity = productData.quantity! - 1;
+                                              //
+                                              //             // Update subTotalAmount
+                                              //             double productRate = double.tryParse(productData?.productRate ?? '0') ?? 0.0;
+                                              //             productData?.subTotalAmount = productData.quantity! * productRate;
+                                              //
+                                              //             // Update totalAmount if needed
+                                              //             salesReportController.totalAmount = salesReportController.subTotalAmount;
+                                              //           }
+                                              //         });
+                                              //       },
+                                              //       child: const Icon(
+                                              //         Icons.remove_circle_outline,
+                                              //         color: ColorRes.primaryColor,
+                                              //         size: 18
+                                              //       ),
+                                              //     ),
+                                              //     sizeBoxW(5),
+                                              //     GlobalText(
+                                              //       str: productData?.quantity.toString() ?? '',
+                                              //       color: ColorRes.black,
+                                              //       fontSize: 13,
+                                              //       fontWeight: FontWeight.w300,
+                                              //     ),
+                                              //     sizeBoxW(5),
+                                              //     GestureDetector(
+                                              //       onTap:(){
+                                              //         setState(() {
+                                              //           productData?.quantity = productData.quantity! + 1;
+                                              //
+                                              //           // Update subTotalAmount
+                                              //           double productRate = double.tryParse(productData?.productRate ?? '0') ?? 0.0;
+                                              //           productData?.subTotalAmount = productData.quantity! * productRate;
+                                              //
+                                              //           // Update totalAmount if needed
+                                              //           salesReportController.totalAmount = salesReportController.subTotalAmount;
+                                              //         });
+                                              //       },
+                                              //       child: const Icon(
+                                              //         Icons.add_circle_outline,
+                                              //         color: ColorRes.primaryColor,
+                                              //         size: 18
+                                              //       ),
+                                              //     ),
+                                              //   ],
+                                              // ),
+                                              sizeBoxW(5),
+                                              // GestureDetector(
+                                              //   onTap: () {
+                                              //     setState(() {
+                                              //       // Increment product quantity
+                                              //       productData?.quantity = productData.quantity! + 1;
+                                              //
+                                              //       // Update subTotalAmount
+                                              //       double productRate = double.tryParse(productData?.productRate ?? '0') ?? 0.0;
+                                              //       productData?.subTotalAmount = productData.quantity! * productRate;
+                                              //
+                                              //       // Update totalAmount if needed
+                                              //       salesReportController.totalAmount = salesReportController.subTotalAmount;
+                                              //     });
+                                              //
+                                              //     // Increment cart count
+                                              //     salesReportController.incrementCartCount();
+                                              //   },
+                                              //   child: Container(
+                                              //     width: Get.width,
+                                              //     padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                                              //     decoration: const BoxDecoration(
+                                              //       borderRadius: BorderRadius.only(
+                                              //         bottomLeft: Radius.circular(5),
+                                              //         bottomRight: Radius.circular(5),
+                                              //       ),
+                                              //       color: ColorRes.primaryColor,
+                                              //     ),
+                                              //     child: const GlobalText(
+                                              //       str: 'Add',
+                                              //       color: ColorRes.white,
+                                              //       fontSize: 12,
+                                              //       fontWeight: FontWeight.w500,
+                                              //       fontFamily: 'Rubik',
+                                              //       textAlign: TextAlign.center,
+                                              //     ),
+                                              //   ),
+                                              // ),
+
+                                            ],
+                                          ),
                                         ),
                                       );
                                     }
@@ -355,7 +388,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     child: SizedBox(
                       child: Center(
                         child: GlobalText(
-                          str: "Not Data Found",
+                          str: " ",
+                          //str: "Not Data Found",
                           color: ColorRes.black,
                           fontWeight: FontWeight.bold,
                         ),

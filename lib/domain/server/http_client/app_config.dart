@@ -13,6 +13,7 @@ enum AppConfig {
   categoryProductModelUrl,
   serveTypeUrl,
   waiterUrl,
+  salesModelUrl,
 
   // =======================/@ Al-Kaderia Panel @/=====================
 
@@ -63,6 +64,8 @@ extension AppUrlExtention on AppConfig {
         return '/Api/SalesApi/types';
       case AppConfig.waiterUrl:
         return '/Api/SalesApi/waiter';
+      case AppConfig.salesModelUrl:
+        return '/Api/SalesApi/save_to_my_sales';
 
       default:
     }

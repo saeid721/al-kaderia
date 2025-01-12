@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import '../model/category_model.dart';
 import '../model/category_product_model.dart';
 import '../model/payment_mode_model.dart';
+import '../model/sales_model.dart';
 import '../model/waiter_model.dart';
 import 'sales_report_repository.dart';
 
@@ -55,6 +56,13 @@ class SalesReportController extends GetxController implements GetxService {
     }
   }
 
+
+  int cartCount = 0; // Add this variable to track cart count
+
+  void incrementCartCount() {
+    cartCount++;
+    update(); // Notify GetBuilder to rebuild
+  }
 
   double? subTotalAmount;
   double? grandTotalAmount;
@@ -216,4 +224,83 @@ class SalesReportController extends GetxController implements GetxService {
   }
 
 
+  /// Sales Model
+  SalesModel? salesModel;
+  Future reqSalesModel({
+    required String? tokenNo,
+  }) async {
+    try {
+      final response = await repository.reqSalesModel(
+        tokenNo: tokenNo,
+      );
+      salesModel = response;
+      update();
+    } catch (e, s) {
+      log('Error: ', error: e, stackTrace: s);
+    }
+  }
+
+  // /// Sales Model
+  // SalesModel? salesModel;
+  // Future reqSalesModel({
+  //   required String? customerMobile,
+  //   required String? customerOccupation,
+  //   required String? currentInvoicePoint,
+  //   required String? totalGiftPoint,
+  //   required String? pointAmountUse,
+  //   required String? grandAmount,
+  //   required String? discountAmount,
+  //   required String? flatDiscountAmount,
+  //   required String? percentageDiscountAmount,
+  //   required String? vatAmount,
+  //   required String? payableAmount,
+  //   required String? paidAmount,
+  //   required String? changeAmount,
+  //   required String? note,
+  //   required String? totalQty,
+  //   required String? tokenNo,
+  //   required String? orderType,
+  //   required String? paymentMethod,
+  //   required String? waiterId,
+  //   required String? categoryName,
+  //   required String? productId,
+  //   required String? productName,
+  //   required String? qty,
+  //   required String? price,
+  //   required String? vat,
+  // }) async {
+  //   try {
+  //     final response = await repository.reqSalesModel(
+  //       customerMobile: customerMobile,
+  //       customerOccupation: customerOccupation,
+  //       currentInvoicePoint: currentInvoicePoint,
+  //       totalGiftPoint: totalGiftPoint,
+  //       pointAmountUse: pointAmountUse,
+  //       grandAmount: grandAmount,
+  //       discountAmount: discountAmount,
+  //       flatDiscountAmount: flatDiscountAmount,
+  //       percentageDiscountAmount: percentageDiscountAmount,
+  //       vatAmount: vatAmount,
+  //       payableAmount: payableAmount,
+  //       paidAmount: paidAmount,
+  //       changeAmount: changeAmount,
+  //       note: note,
+  //       totalQty: totalQty,
+  //       tokenNo: tokenNo,
+  //       orderType: orderType,
+  //       paymentMethod: paymentMethod,
+  //       waiterId: waiterId,
+  //       categoryName: categoryName,
+  //       productId: productId,
+  //       productName: productName,
+  //       qty: qty,
+  //       price: price,
+  //       vat: vat,
+  //     );
+  //     salesModel = response;
+  //     update();
+  //   } catch (e, s) {
+  //     log('Error: ', error: e, stackTrace: s);
+  //   }
+  // }
 }
