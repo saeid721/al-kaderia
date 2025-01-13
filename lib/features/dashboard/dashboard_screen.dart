@@ -115,35 +115,35 @@ class _DashboardScreenState extends State<DashboardScreen> {
               color: Colors.white,
               child: Column(
                 children: [
-                  // Container(
-                  //   width: size(context).width,
-                  //   decoration: BoxDecoration(
-                  //     borderRadius: BorderRadius.circular(5),
-                  //     color: ColorRes.primaryColor
-                  //   ),
-                  //   margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                  //   padding: const EdgeInsets.symmetric(vertical: 20),
-                  //   child: const Column(
-                  //     children: [
-                  //       GlobalText(
-                  //         str: 'Charge',
-                  //         color: ColorRes.white,
-                  //         fontSize: 14,
-                  //         fontWeight: FontWeight.w500,
-                  //         textAlign: TextAlign.center,
-                  //         fontFamily: 'Rubik',
-                  //       ),
-                  //       GlobalText(
-                  //         str: 'TK \$2000',
-                  //         color: ColorRes.white,
-                  //         fontSize: 14,
-                  //         fontWeight: FontWeight.w400,
-                  //         textAlign: TextAlign.center,
-                  //         fontFamily: 'Rubik',
-                  //       ),
-                  //     ],
-                  //   ),
-                  // ),
+                  Container(
+                    width: size(context).width,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      color: ColorRes.primaryColor
+                    ),
+                    margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                    padding: const EdgeInsets.symmetric(vertical: 20),
+                    child: const Column(
+                      children: [
+                        GlobalText(
+                          str: 'Charge',
+                          color: ColorRes.white,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                          textAlign: TextAlign.center,
+                          fontFamily: 'Rubik',
+                        ),
+                        GlobalText(
+                          str: 'TK \$2000',
+                          color: ColorRes.white,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                          textAlign: TextAlign.center,
+                          fontFamily: 'Rubik',
+                        ),
+                      ],
+                    ),
+                  ),
 
                   sizeBoxH(12),
                   Padding(
@@ -224,7 +224,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                       mainAxisSpacing: 10,
                                       crossAxisSpacing: 10,
                                       crossAxisCount: 3,
-                                      childAspectRatio: (3.2 / 4)
+                                      childAspectRatio: (2.4 / 4)
                                     ),
                                     itemBuilder: (ctx, index){
 
@@ -281,97 +281,97 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                                 maxLines: 3,
                                               ),
                                               Expanded(child: Container()),
-                                              // Row(
-                                              //   mainAxisAlignment: MainAxisAlignment.center,
-                                              //   children: [
-                                              //     GestureDetector(
-                                              //       onTap:(){
-                                              //         setState(() {
-                                              //           if (productData?.quantity! == 1) {
-                                              //             productData?.quantity = productData.quantity! - 1;
-                                              //
-                                              //             // Update subTotalAmount
-                                              //             double productRate = double.tryParse(productData?.productRate ?? '0') ?? 0.0;
-                                              //             productData?.subTotalAmount = productData.quantity! * productRate;
-                                              //
-                                              //             // Update totalAmount if needed
-                                              //             salesReportController.totalAmount = salesReportController.subTotalAmount;
-                                              //           }
-                                              //         });
-                                              //       },
-                                              //       child: const Icon(
-                                              //         Icons.remove_circle_outline,
-                                              //         color: ColorRes.primaryColor,
-                                              //         size: 18
-                                              //       ),
-                                              //     ),
-                                              //     sizeBoxW(5),
-                                              //     GlobalText(
-                                              //       str: productData?.quantity.toString() ?? '',
-                                              //       color: ColorRes.black,
-                                              //       fontSize: 13,
-                                              //       fontWeight: FontWeight.w300,
-                                              //     ),
-                                              //     sizeBoxW(5),
-                                              //     GestureDetector(
-                                              //       onTap:(){
-                                              //         setState(() {
-                                              //           productData?.quantity = productData.quantity! + 1;
-                                              //
-                                              //           // Update subTotalAmount
-                                              //           double productRate = double.tryParse(productData?.productRate ?? '0') ?? 0.0;
-                                              //           productData?.subTotalAmount = productData.quantity! * productRate;
-                                              //
-                                              //           // Update totalAmount if needed
-                                              //           salesReportController.totalAmount = salesReportController.subTotalAmount;
-                                              //         });
-                                              //       },
-                                              //       child: const Icon(
-                                              //         Icons.add_circle_outline,
-                                              //         color: ColorRes.primaryColor,
-                                              //         size: 18
-                                              //       ),
-                                              //     ),
-                                              //   ],
-                                              // ),
+                                              Row(
+                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                children: [
+                                                  GestureDetector(
+                                                    onTap:(){
+                                                      setState(() {
+                                                        if (productData?.quantity! == 1) {
+                                                          productData?.quantity = productData.quantity! - 1;
+
+                                                          // Update subTotalAmount
+                                                          double productRate = double.tryParse(productData?.productRate ?? '0') ?? 0.0;
+                                                          productData?.subTotalAmount = productData.quantity! * productRate;
+
+                                                          // Update totalAmount if needed
+                                                          salesReportController.totalAmount = salesReportController.subTotalAmount;
+                                                        }
+                                                      });
+                                                    },
+                                                    child: const Icon(
+                                                      Icons.remove_circle_outline,
+                                                      color: ColorRes.primaryColor,
+                                                      size: 18
+                                                    ),
+                                                  ),
+                                                  sizeBoxW(5),
+                                                  GlobalText(
+                                                    str: productData?.quantity.toString() ?? '',
+                                                    color: ColorRes.black,
+                                                    fontSize: 13,
+                                                    fontWeight: FontWeight.w300,
+                                                  ),
+                                                  sizeBoxW(5),
+                                                  GestureDetector(
+                                                    onTap:(){
+                                                      setState(() {
+                                                        productData?.quantity = productData.quantity! + 1;
+
+                                                        // Update subTotalAmount
+                                                        double productRate = double.tryParse(productData?.productRate ?? '0') ?? 0.0;
+                                                        productData?.subTotalAmount = productData.quantity! * productRate;
+
+                                                        // Update totalAmount if needed
+                                                        salesReportController.totalAmount = salesReportController.subTotalAmount;
+                                                      });
+                                                    },
+                                                    child: const Icon(
+                                                      Icons.add_circle_outline,
+                                                      color: ColorRes.primaryColor,
+                                                      size: 18
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
                                               sizeBoxW(5),
-                                              // GestureDetector(
-                                              //   onTap: () {
-                                              //     setState(() {
-                                              //       // Increment product quantity
-                                              //       productData?.quantity = productData.quantity! + 1;
-                                              //
-                                              //       // Update subTotalAmount
-                                              //       double productRate = double.tryParse(productData?.productRate ?? '0') ?? 0.0;
-                                              //       productData?.subTotalAmount = productData.quantity! * productRate;
-                                              //
-                                              //       // Update totalAmount if needed
-                                              //       salesReportController.totalAmount = salesReportController.subTotalAmount;
-                                              //     });
-                                              //
-                                              //     // Increment cart count
-                                              //     salesReportController.incrementCartCount();
-                                              //   },
-                                              //   child: Container(
-                                              //     width: Get.width,
-                                              //     padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-                                              //     decoration: const BoxDecoration(
-                                              //       borderRadius: BorderRadius.only(
-                                              //         bottomLeft: Radius.circular(5),
-                                              //         bottomRight: Radius.circular(5),
-                                              //       ),
-                                              //       color: ColorRes.primaryColor,
-                                              //     ),
-                                              //     child: const GlobalText(
-                                              //       str: 'Add',
-                                              //       color: ColorRes.white,
-                                              //       fontSize: 12,
-                                              //       fontWeight: FontWeight.w500,
-                                              //       fontFamily: 'Rubik',
-                                              //       textAlign: TextAlign.center,
-                                              //     ),
-                                              //   ),
-                                              // ),
+                                              GestureDetector(
+                                                onTap: () {
+                                                  setState(() {
+                                                    // Increment product quantity
+                                                    productData?.quantity = productData.quantity! + 1;
+
+                                                    // Update subTotalAmount
+                                                    double productRate = double.tryParse(productData?.productRate ?? '0') ?? 0.0;
+                                                    productData?.subTotalAmount = productData.quantity! * productRate;
+
+                                                    // Update totalAmount if needed
+                                                    salesReportController.totalAmount = salesReportController.subTotalAmount;
+                                                  });
+
+                                                  // Increment cart count
+                                                  salesReportController.incrementCartCount();
+                                                },
+                                                child: Container(
+                                                  width: Get.width,
+                                                  padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                                                  decoration: const BoxDecoration(
+                                                    borderRadius: BorderRadius.only(
+                                                      bottomLeft: Radius.circular(5),
+                                                      bottomRight: Radius.circular(5),
+                                                    ),
+                                                    color: ColorRes.primaryColor,
+                                                  ),
+                                                  child: const GlobalText(
+                                                    str: 'Add',
+                                                    color: ColorRes.white,
+                                                    fontSize: 12,
+                                                    fontWeight: FontWeight.w500,
+                                                    fontFamily: 'Rubik',
+                                                    textAlign: TextAlign.center,
+                                                  ),
+                                                ),
+                                              ),
 
                                             ],
                                           ),

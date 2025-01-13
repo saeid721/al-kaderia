@@ -206,7 +206,7 @@ class _InvoiceDetailsScreenState extends State<InvoiceDetailsScreen> {
 
                         sizeBoxH(5),
                         const GlobalText(
-                          str: "Powered By Alkaderia",
+                          str: "Powered By Al-Kaderia",
                           color: ColorRes.deep300,
                           fontSize: 12,
                           fontWeight: FontWeight.w400,

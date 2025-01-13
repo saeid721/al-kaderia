@@ -16,6 +16,7 @@ import '../../../base_widget/global_button.dart';
 import '../controller/sales_report_controller.dart';
 import 'component/sales_summery_table_widget.dart';
 import 'invoice_details_screen.dart';
+import 'sale_print_screen.dart';
 
 class SaleEntrySearchScreen extends StatefulWidget {
   const SaleEntrySearchScreen({super.key});
@@ -135,7 +136,7 @@ class _SaleEntrySearchScreenState extends State<SaleEntrySearchScreen> {
                               child: GlobalSmallSearchTextFormField(
                                 text: selectDiscountStatus,
                                 titleText: "Discount Status",
-                                vertical: 10,
+                                vertical: 13,
                                 color: ColorRes.black,
                                 item: selectDiscountStatusList,
                                 onSelect: (val) async {
@@ -163,8 +164,9 @@ class _SaleEntrySearchScreenState extends State<SaleEntrySearchScreen> {
                             ),
                             sizeBoxW(5),
                             Expanded(
-                              child: GlobalSearchTextFormField(
+                              child: GlobalSmallSearchTextFormField(
                                 titleText: 'Payment Mode',
+                                vertical: 13,
                                 text: salesReportController.selectPaymentMode,
                                 color: salesReportController.selectPaymentModeIndex > -1 ? ColorRes.black : ColorRes.grey,
                                 item: salesReportController.selectPaymentModeList ?? [],
@@ -320,7 +322,18 @@ class _SaleEntrySearchScreenState extends State<SaleEntrySearchScreen> {
                                     onTap: () {
                                       Get.to(() => const InvoiceDetailsScreen());
                                     },
-                                    onTapPrint: () {},
+                                    onTapPrint: () {
+                                      Get.to(() => const SalesPrinterDialog(
+                                        salesModel: null,
+                                        selectedProducts: [],
+                                        customerName: '',
+                                        grandTotal: null,
+                                        totalAmount: null,
+                                        discountAmount: '',
+                                        collectedAmount: '',
+                                        changeAmount: '',
+                                        paymentVaiName: '',  ));
+                                    },
                                   );
                                 },
                               ),
